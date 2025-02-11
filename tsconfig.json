@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "outDir": "build",
+    "rootDir": "src",
+    "strict": true,
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": false,
+
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./src",
+    "paths": {
+      "#database": ["./database/index.ts"],
+      "#settings": ["./settings/index.ts"],
+      "#translete": ["./translate/index.ts"]
+    }
+  },
+  "include": ["src/**/*", "index.d.ts"],
+  "exclude": ["build", "node_modules"]
+}

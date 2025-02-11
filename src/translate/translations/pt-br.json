@@ -1,0 +1,63 @@
+{
+  "client": {
+    "messages": {
+      "ping": "Pong! Minha latência é de {ping}ms"
+    }
+  },
+  "user": {
+    "economy": {
+      "wallet": "{targetUser}, tem: {pamonhas} pamonhas e está na posição 🏆 #{userPosition} no ranking!",
+      "transfer": {
+        "success": {
+          "title": "Transferência Concluída",
+          "description": "{payerUser} transferiu **{value} pamonhas** para {targetUser}."
+        },
+        "error": {
+          "title": "Erro na Transferência"
+        }
+      },
+      "errors": {
+        "pay": {
+          "selfTransfer": "Você não pode transferir pamonhas para si mesmo.",
+          "invalidValue": "O valor deve ser maior que zero.",
+          "unknown": "Ocorreu um erro desconhecido.",
+          "processing": "Ocorreu um erro ao processar a transferência.",
+          "botTransfer": "Você não pode transferir pamonhas para bots.",
+          "botWallet": "Bots não possuem carteira."
+        }
+      }
+    }
+  },
+  "rewards": {
+    "status": {
+      "available": "Disponível",
+      "onCooldown": "Em cooldown até {time}"
+    },
+    "available": {
+      "title": "Recompensas Disponíveis",
+      "description": "Aqui estão suas recompensas disponíveis:"
+    },
+    "types": {
+      "daily": {
+        "name": "Recompensa Diária"
+      },
+      "weekly": {
+        "name": "Recompensa Semanal"
+      },
+      "monthly": {
+        "name": "Recompensa Mensal"
+      }
+    },
+    "collected": {
+      "title": "Recompensa Coletada",
+      "description": "Você coletou {amount} pamonhas."
+    },
+    "button": {
+      "label": {
+        "daily": "Diária",
+        "weekly": "Semanal",
+        "monthly": "Mensal"
+      }
+    }
+  }
+}

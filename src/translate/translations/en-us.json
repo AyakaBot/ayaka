@@ -1,0 +1,63 @@
+{
+    "client": {
+        "messages": {
+            "ping": "Pong! My latency is {ping}ms"
+        }
+    },
+    "user": {
+        "economy": {
+            "wallet": "{targetUser} has: {pamonhas} pamonhas and is in position 🏆 #{userPosition} in the ranking!",
+            "transfer": {
+                "success": {
+                    "title": "Transfer Completed",
+                    "description": "{payerUser} transferred **{value} pamonhas** to {targetUser}."
+                },
+                "error": {
+                    "title": "Transfer Error"
+                }
+            },
+            "errors": {
+                "pay": {
+                    "selfTransfer": "You cannot transfer pamonhas to yourself.",
+                    "invalidValue": "The value must be greater than zero.",
+                    "unknown": "An unknown error occurred.",
+                    "processing": "An error occurred while processing the transfer.",
+                    "botTransfer": "You can't transfer tamales to bots.",
+                    "botWallet": "Bots don't have a wallet."
+                }
+            }
+        }
+    },
+    "rewards": {
+        "available": {
+            "title": "Available Rewards",
+            "description": "Here are your available rewards:"
+        },
+        "status": {
+            "available": "Available",
+            "onCooldown": "On cooldown until {time}"
+        },
+        "types": {
+            "daily": {
+                "name": "Daily Reward"
+            },
+            "weekly": {
+                "name": "Weekly Reward"
+            },
+            "monthly": {
+                "name": "Monthly Reward"
+            }
+        },
+        "collected": {
+            "title": "Reward Collected",
+            "description": "You have collected {amount} pamonhas."
+        },
+        "button": {
+            "label": {
+                "daily": "Daily",
+                "weekly": "Weekly",
+                "monthly": "Monthly"
+            }
+        }
+    }
+}
