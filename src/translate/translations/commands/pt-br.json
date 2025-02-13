@@ -1,0 +1,36 @@
+{
+    "ping": {
+        "description": "Veja a latência do bot.",
+        "name": "ping"
+    },
+
+    "wallet": {
+        "description": "Veja o saldo de moedas do usuário.",
+        "name": "carteira",
+        "options": {
+            "user": {
+                "description": "O usuário para mostrar o saldo.",
+                "name": "alvo"
+            }
+        }
+    },
+    "rewards": {
+        "description": "Colete suas recompensas.",
+        "name": "recompensas"
+    },
+
+    "pay": {
+        "description": "Pague a alguém.",
+        "name": "pagar",
+        "options": {
+            "user": {
+                "description": "O usuário para pagar.",
+                "name": "alvo"
+            },
+            "amount": {
+                "description": "A quantidade de pamonhas para pagar.",
+                "name": "quantidade"
+            }
+        }
+    }
+}

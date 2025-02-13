@@ -7,35 +7,35 @@ import {
 } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 import { processTransfer } from "../../functions/pay/pay.js";
-import { translate } from "#translete";
+import { getLocalizations, translate } from "#translete";
 
 @Discord()
 export class Pay {
     @Slash({
         name: "pay",
-        nameLocalizations: { "pt-BR": "pagar" },
+        nameLocalizations: getLocalizations("pay.name"),
         description: "Send pamonhas to another user",
-        descriptionLocalizations: { "pt-BR": "Envie pamonhas para outro usuário" },
+        descriptionLocalizations: getLocalizations("pay.description"),
         contexts: [InteractionContextType.Guild],
         defaultMemberPermissions: ["SendMessages"]
     })
     async run(
         @SlashOption({
             name: "target",
-            nameLocalizations: { "pt-BR": "alvo" },
+            nameLocalizations: getLocalizations("pay.options.user.name"),
             description: "Target user to send pamonhas",
-            descriptionLocalizations: { "pt-BR": "Usuário alvo para enviar pamonhas" },
+            descriptionLocalizations: getLocalizations("pay.options.user.description"),
             type: ApplicationCommandOptionType.User,
-            required: true,
+            required,
         })
         target: User,
         @SlashOption({
             name: "value",
-            nameLocalizations: { "pt-BR": "valor" },
+            nameLocalizations: getLocalizations("pay.options.amount.name"),
             description: "Value of pamonhas to transfer",
-            descriptionLocalizations: { "pt-BR": "Valor de pamonhas para transferir" },
+            descriptionLocalizations: getLocalizations("pay.options.amount.description"),
             type: ApplicationCommandOptionType.Number,
-            required: true,
+            required,
         })
         value: number,
         interaction: ChatInputCommandInteraction<"cached">

@@ -13,12 +13,22 @@ const __dirname = dirname(__filename);
 
 export function loadTranslations(directory: string) {
     const files = fs.readdirSync(directory);
+
     for (const file of files) {
-        if (file.endsWith(".json")) {
+        const filePath = path.resolve(directory, file);
+        const stat = fs.statSync(filePath);
+
+        if (stat.isDirectory()) {
+            loadTranslations(filePath);
+        } 
+        else if (file.endsWith(".json")) {
             const locale = path.basename(file, ".json");
-            const filePath = path.resolve(directory, file);
             const fileData = fs.readFileSync(filePath, "utf8");
-            translations[locale] = JSON.parse(fileData);
+
+            translations[locale] = {
+                ...translations[locale],
+                ...JSON.parse(fileData),
+            };
         }
     }
 }
@@ -26,7 +36,11 @@ export function loadTranslations(directory: string) {
 const translationsDir = path.resolve(__dirname, "./translations");
 loadTranslations(translationsDir);
 
-export function translate(locale: string, key: string, placeholders?: Record<string, string | number>): string {
+export function translate(
+    locale: string,
+    key: string,
+    placeholders?: Record<string, string | number>
+): string {
     const localeTranslations = translations[locale.toLowerCase()] || translations["en-us"];
     if (!localeTranslations) {
         return `Missing locale: ${locale} and fallback locale: en-us`;
@@ -51,3 +65,5 @@ export function translate(locale: string, key: string, placeholders?: Record<str
 
     return typeof translation === "string" ? translation : `Invalid key: ${key}`;
 }
+
+export * from "./utils.js";

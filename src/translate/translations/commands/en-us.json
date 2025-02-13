@@ -1,0 +1,36 @@
+{
+    "ping": {
+        "description": "Pings the bot.",
+        "name": "ping"
+    },
+    
+    "wallet": {
+        "description": "Shows the user's coin balance.",
+        "name": "wallet",
+        "options": {
+            "user": {
+                "description": "The user to show the balance of.",
+                "name": "target"
+            }
+        }
+    },
+    "rewards": {
+        "description": "Collect you rewards.",
+        "name": "rewards"
+    },
+
+    "pay": {
+        "description": "Pay someone.",
+        "name": "pay",
+        "options": {
+            "user": {
+                "description": "The user to pay.",
+                "name": "target"
+            },
+            "amount": {
+                "description": "The amount of pamonhas to pay.",
+                "name": "amount"
+            }
+        }
+    }
+}

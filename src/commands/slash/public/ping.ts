@@ -1,4 +1,4 @@
-import { translate } from "#translete";
+import { getLocalizations, translate } from "#translete";
 import { ChatInputCommandInteraction, InteractionContextType } from "discord.js";
 import { Discord, Slash } from "discordx";
 
@@ -6,8 +6,9 @@ import { Discord, Slash } from "discordx";
 export class Ping {
     @Slash({
         name: "ping",
+        nameLocalizations: getLocalizations("ping.name"),
         description: "Reply with pong!",
-        descriptionLocalizations: { "pt-BR": "Responde com pong!", },
+        descriptionLocalizations: getLocalizations("ping.description"),
         contexts: [InteractionContextType.Guild],
         defaultMemberPermissions: ["SendMessages"]
     })

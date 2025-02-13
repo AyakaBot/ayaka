@@ -3,15 +3,16 @@ import { ButtonComponent, Discord, Slash } from "discordx";
 import { getOrCreateUser } from "#database";
 import { colors, getIcon } from "#settings";
 import { claimReward, getButtonCooldown, createButtonRow, generateRandomReward } from "../../functions/rewards/rewards.js";
-import { translate } from "#translete";
+import { getLocalizations, translate } from "#translete";
 
 @Discord()
 export class Rewards {
     @Slash({
         name: "rewards",
-        nameLocalizations: { "pt-BR": "recompensas" },
+        nameLocalizations: getLocalizations("rewards.name"),
         description: "Claim your rewards",
-        descriptionLocalizations: { "pt-BR": "Reivindique suas recompensas" },
+        descriptionLocalizations: getLocalizations("rewards.description"),
+        defaultMemberPermissions: ["SendMessages"],
         contexts: [InteractionContextType.Guild],
     })
     async run(interaction: ChatInputCommandInteraction<"cached">) {

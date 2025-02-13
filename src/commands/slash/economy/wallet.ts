@@ -1,24 +1,24 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, InteractionContextType, User } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 import { getOrCreateUser, getUserRankingPosition } from "#database";
-import { translate } from "#translete";
+import { getLocalizations, translate } from "#translete";
 
 @Discord()
 export class Wallet {
     @Slash({
         name: "wallet",
-        nameLocalizations: { "pt-BR": "carteira" },
+        nameLocalizations: getLocalizations("wallet.name"),
         description: "View your wallet",
-        descriptionLocalizations: { "pt-BR": "Visualize sua carteira" },
+        descriptionLocalizations: getLocalizations("wallet.description"),
         contexts: [InteractionContextType.Guild],
         defaultMemberPermissions: ["SendMessages"]
     })
     async run(
         @SlashOption({
             name: "target",
-            nameLocalizations: { "pt-BR": "alvo" },
+            nameLocalizations: getLocalizations("wallet.options.user.name"),
             description: "Target user to view wallet",
-            descriptionLocalizations: { "pt-BR": "Usuário alvo para visualizar a carteira" },
+            descriptionLocalizations: getLocalizations("wallet.options.user.description"),
             type: ApplicationCommandOptionType.User,
         })
         target: User,
