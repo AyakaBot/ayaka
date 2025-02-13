@@ -21,6 +21,6 @@
       "#translete": ["./translate/index.ts"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["./"],
   "exclude": ["build", "node_modules"]
 }
