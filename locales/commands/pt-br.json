@@ -34,7 +34,7 @@
         },
         "language": {
             "description": "Defina o idioma do bot.",
-            "name": "idioma",
+            "name": "definir_idioma",
             "options": {
                 "language": {
                     "description": "O idioma para definir.",
