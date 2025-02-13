@@ -6,13 +6,7 @@
         },
         "wallet": {
             "description": "Shows the user's coin balance.",
-            "name": "wallet",
-            "options": {
-                "user": {
-                    "description": "The user to show the balance of.",
-                    "name": "target"
-                }
-            }
+            "name": "wallet"
         },
         "rewards": {
             "description": "Collect you rewards.",
@@ -20,27 +14,15 @@
         },
         "pay": {
             "description": "Pay someone.",
-            "name": "pay",
-            "options": {
-                "user": {
-                    "description": "The user to pay.",
-                    "name": "target"
-                },
-                "amount": {
-                    "description": "The amount of pamonhas to pay.",
-                    "name": "amount"
-                }
-            }
+            "name": "pay"
         },
         "language": {
             "description": "Set the language of the bot.",
-            "name": "setlanguage",
-            "options": {
-                "language": {
-                    "description": "The language to set.",
-                    "name": "language"
-                }
-            }
+            "name": "setlanguage"
+        },
+        "help": {
+            "description": "See my commands and some information",
+            "name": "help"
         }
     }
 }

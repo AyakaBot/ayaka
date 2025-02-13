@@ -41,6 +41,11 @@
                     "name": "idioma"
                 }
             }
+        },
+
+        "help": {
+            "name": "ayuda",
+            "description": "Muestra una mensaje de ayuda"
         }
     }
 }

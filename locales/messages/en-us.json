@@ -10,7 +10,6 @@
                         "name": "Current language",
                         "value": "{userLocale}"
                     },
-
                     "library": {
                         "name": "I was made with",
                         "value": "TypeScript & Discordx"
@@ -75,10 +74,27 @@
             }
         }
     },
-
     "set_language": {
         "embed": {
             "description": "The language has been set to English."
+        }
+    },
+    "help": {
+        "commands": {
+            "general": {
+                "title": "General"
+            },
+            "economy": {
+                "title": "Economy"
+            }
+        },
+        "embed": {
+            "categoryTitle": "{category}",
+            "title": "Bot Help",
+            "description": "Hello, {username}! Here is some information about me.",
+            "commands": "Commands",
+            "instructions": "Use the buttons below to navigate through commands.",
+            "footer": "Page {page} of {totalPages}"
         }
     }
 }

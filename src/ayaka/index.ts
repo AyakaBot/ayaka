@@ -19,7 +19,7 @@ export const bot = new Client({
     // simpleCommand: {
     //     prefix: []
     // },
-    silent: false,
+    silent: true,
     botGuilds: [process.env.DEV_GUILD, "1301901686226419843"],
     presence: {
         activities: [{

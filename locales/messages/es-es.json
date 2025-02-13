@@ -78,5 +78,23 @@
         "embed": {
             "description": "El idioma ha sido configurado a Espanhol."
         }
+    },
+    "help": {
+        "commands": {
+            "general": {
+                "title": "General"
+            },
+            "economy": {
+                "title": "Economía"
+            }
+        },
+        "embed": {
+            "categoryTitle": "{category}",
+            "title": "Ayuda del Bot",
+            "description": "¡Hola, {username}! Aquí tienes información sobre mí.",
+            "commands": "Comandos",
+            "instructions": "Usa los botones de abajo para navegar por los comandos.",
+            "footer": "Página {page} de {totalPages}"
+        }
     }
 }

@@ -78,5 +78,23 @@
     "embed": {
       "description": "Meu idioma foi setado para Português."
     }
+  },
+  "help": {
+    "commands": {
+      "general": {
+        "title": "Geral"
+      },
+      "economy": {
+        "title": "Economia"
+      }
+    },
+    "embed": {
+      "categoryTitle": "{category}",
+      "title": "Ajuda",
+      "description": "Olá, {username}! Aqui estão algumas informações sobre mim.",
+      "commands": "Comandos",
+      "instructions": "Use os botões abaixo para navegar pelos comandos.",
+      "footer": "Página {page} de {totalPages}"
+    }
   }
 }

@@ -78,5 +78,23 @@
         "embed": {
             "description": "Язык установлен на русский."
         }
+    },
+    "help": {
+        "commands": {
+            "general": {
+                "title": "Общее"
+            },
+            "economy": {
+                "title": "Экономика"
+            }
+        },
+        "embed": {
+            "categoryTitle": "{category}",
+            "title": "Помощь Бота",
+            "description": "Привет, {username}! Вот некоторая информация обо мне.",
+            "commands": "Команды",
+            "instructions": "Используйте кнопки ниже для навигации по командам.",
+            "footer": "Страница {page} из {totalPages}"
+        }
     }
 }

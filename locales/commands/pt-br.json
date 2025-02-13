@@ -41,6 +41,10 @@
                     "name": "idioma"
                 }
             }
+        },
+        "help": {
+            "description": "Veja meus comandos e algumas iformações",
+            "name": "ajuda"
         }
     }
 }

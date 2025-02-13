@@ -8,7 +8,7 @@ export class Wallet {
     @Slash({
         name: "wallet",
         nameLocalizations: getLocalizations("commands.wallet.name"),
-        description: "View your wallet",
+        description: "Shows the user's coin balance.",
         descriptionLocalizations: getLocalizations("commands.wallet.description"),
         contexts: [InteractionContextType.Guild],
         defaultMemberPermissions: ["SendMessages"],
@@ -17,7 +17,7 @@ export class Wallet {
         @SlashOption({
             name: "target",
             nameLocalizations: getLocalizations("commands.wallet.options.user.name"),
-            description: "Target user to view wallet",
+            description: "The user to show the balance of",
             descriptionLocalizations: getLocalizations("commands.wallet.options.user.description"),
             type: ApplicationCommandOptionType.User,
         })
