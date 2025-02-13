@@ -1,5 +1,5 @@
 import { db } from "#database";
-import { User } from "discord.js";
+import { Locale, User } from "discord.js";
 
 export async function getOrCreateUser(userId: string) {
     const id = db.users.id(userId);
@@ -22,13 +22,30 @@ export async function getOrCreateUser(userId: string) {
     return user;
 }
 
-export async function getUserLocale(user: User): Promise<string | null> {
+
+export async function getUserLocale(user: User): Promise<Locale> {
     try {
-        const userDoc = await db.users.get(db.users.id(user.id));
-        return userDoc?.data.options?.language || null;
+        const userDoc = await getOrCreateUser(user.id);
+
+        const userLanguage = userDoc?.data?.options?.language;
+
+        if (userLanguage) {
+            switch (userLanguage.toLowerCase()) {
+                case "en-us": return Locale.EnglishUS;
+                case "pt-br": return Locale.PortugueseBR;
+                case "es-es": return Locale.SpanishES;
+                case "ru": return Locale.Russian;
+                default:
+                    console.warn(`Invalid language in DB for user ${user.id}: ${userLanguage}`);
+                    return Locale.EnglishUS;
+            }
+        }
+
+        console.warn(`Missing language in DB for user ${user.id}`);
+        return Locale.EnglishUS;
     } catch (error) {
         console.error(`Failed to fetch user language for ${user.id}:`, error);
-        return null;
+        return Locale.EnglishUS;
     }
 }
 

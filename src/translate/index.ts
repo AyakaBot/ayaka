@@ -1,15 +1,11 @@
 import fs from "fs";
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
+import path from "path";
 
 interface Translations {
     [key: string]: string | Translations;
 }
 
 const translations: Record<string, Translations> = {};
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 export function loadTranslations(directory: string) {
     const files = fs.readdirSync(directory);
@@ -32,16 +28,15 @@ export function loadTranslations(directory: string) {
     }
 }
 
-const translationsDir = path.resolve(__dirname, "./translations");
+const translationsDir = "locales";
 loadTranslations(translationsDir);
 
 export function translate(
     locale: string,
     key: string,
-    placeholders?: Record<string, string | number>,
-    userLanguage?: string | null 
+    placeholders?: Record<string, string | number>
 ): string {
-    const targetLanguage = (userLanguage || locale).toLowerCase();
+    const targetLanguage = locale.toLowerCase();
 
     const localeTranslations = translations[targetLanguage] || translations["en-us"];
     if (!localeTranslations) {

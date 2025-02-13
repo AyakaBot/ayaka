@@ -1,6 +1,6 @@
 import { getUserLocale } from "#database";
 import { getLocalizations, translate } from "#translete";
-import { ChatInputCommandInteraction, InteractionContextType } from "discord.js";
+import { ChatInputCommandInteraction, InteractionContextType, Locale } from "discord.js";
 import { Discord, Slash } from "discordx";
 
 @Discord()
@@ -18,6 +18,6 @@ export class Ping {
 
         const userLocale = await getUserLocale(user);
 
-        await interaction.reply(translate(locale, "client.messages.ping", { ping: client.ws.ping }, userLocale));
+        await interaction.reply(translate(userLocale ?? locale, "client.messages.ping", { ping: client.ws.ping }));
     }
 }

@@ -47,7 +47,7 @@ export class Pay {
         if (targetMember.user.bot) {
             return interaction.reply({
                 flags,
-                content: translate(locale, "user.economy.errors.pay.botTransfer", undefined, userLocale),
+                content: translate(userLocale ?? locale, "user.economy.errors.pay.botTransfer"),
             });
         }
 

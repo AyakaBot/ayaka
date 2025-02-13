@@ -12,14 +12,14 @@ export async function processTransfer(
 ) {
     if (target.id === interaction.member.id) {
         return {
-            content: translate(locale, "user.economy.errors.pay.selfTransfer", undefined, userLocale),
+            content: translate(userLocale ?? locale, "user.economy.errors.pay.selfTransfer"),
             embed: null,
         };
     }
 
     if (value <= 0) {
         return {
-            content: translate(locale, "user.economy.errors.pay.invalidValue", undefined, userLocale),
+            content: translate(userLocale ?? locale, "user.economy.errors.pay.invalidValue"),
             embed: null,
         };
     }
@@ -39,13 +39,13 @@ export async function processTransfer(
             const payerUser = interaction.user.toString();
 
             embed
-                .setTitle(translate(locale, "user.economy.transfer.success.title", undefined, userLocale))
+                .setTitle(translate(userLocale ?? locale, "user.economy.transfer.success.title"))
                 .setDescription(
-                    translate(locale, "user.economy.transfer.success.description", {
+                    translate(userLocale ?? locale, "user.economy.transfer.success.description", {
                         value,
                         payerUser,
                         targetUser,
-                    }, userLocale)
+                    })
                 )
                 .setColor(colors.success);
 
@@ -57,9 +57,9 @@ export async function processTransfer(
             return { content: null, embed };
         } else {
             embed
-                .setTitle(translate(locale, "user.economy.transfer.error.title", undefined, userLocale))
+                .setTitle(translate(userLocale ?? locale, "user.economy.transfer.error.title"))
                 .setDescription(
-                    transferResult.error ?? translate(locale, "user.economy.errors.pay.unknown", undefined, userLocale)
+                    transferResult.error ?? translate(userLocale ?? locale, "user.economy.errors.pay.unknown")
                 )
                 .setColor(colors.danger);
 
@@ -68,7 +68,7 @@ export async function processTransfer(
     } catch (error) {
         console.error(error);
         return {
-            content: translate(locale, "user.economy.errors.pay.processing", undefined, userLocale),
+            content: translate(userLocale ?? locale, "user.economy.errors.pay.processing"),
             embed: null,
         };
     }

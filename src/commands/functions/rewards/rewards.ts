@@ -28,7 +28,7 @@ export function createButtonRow(locale: string, cooldowns: Record<string, { isAc
         Object.entries(cooldowns).map(([type, { isActive }]) =>
             new ButtonBuilder()
                 .setCustomId(type.toLowerCase())
-                .setLabel(translate(locale, `rewards.button.label.${type.toLowerCase()}`, undefined, userLocale))
+                .setLabel(translate(userLocale ?? locale, `rewards.button.label.${type.toLowerCase()}`))
                 .setEmoji(icon.dolar)
                 .setStyle(
                     type === "Daily"
@@ -51,8 +51,8 @@ export async function claimReward(interaction: ButtonInteraction<"cached">, type
     await updateUserCooldown(interaction.member.id, type);
 
     const embed = new EmbedBuilder()
-        .setTitle(translate(locale, `rewards.collected.title`, { type }, userLocale))
-        .setDescription(translate(locale, `rewards.collected.description`, { amount }, userLocale))
+        .setTitle(translate(userLocale ?? locale, `rewards.collected.title`, { type }))
+        .setDescription(translate(userLocale ?? locale, `rewards.collected.description`, { amount }))
         .setColor(colors.success);
 
     const userUpdated = await getOrCreateUser(interaction.member.id);

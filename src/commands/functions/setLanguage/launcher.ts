@@ -15,7 +15,7 @@ export async function launcher(interaction: ChatInputCommandInteraction<"cached"
     const userLocale = await getUserLocale(user);
 
     const embed = new EmbedBuilder()
-        .setDescription(translate(locale, "set_language.embed.description", undefined, userLocale))
+        .setDescription(translate(userLocale ?? locale, "set_language.embed.description"))
         .setColor(colors.success);
 
     await interaction.editReply({ embeds: [embed] });

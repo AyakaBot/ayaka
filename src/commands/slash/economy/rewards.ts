@@ -29,8 +29,8 @@ export class Rewards {
         };
 
         const embed = new EmbedBuilder()
-            .setTitle(translate(locale, "rewards.available.title", undefined, userLocale))
-            .setDescription(translate(locale, "rewards.available.description", undefined, userLocale))
+            .setTitle(translate(userLocale ?? locale, "rewards.available.title"))
+            .setDescription(translate(userLocale ?? locale, "rewards.available.description"))
             .setColor(colors.success)
             .addFields(
                 Object.entries(cooldowns).map(([type, { isActive, cooldownEnd }]) => {
@@ -38,8 +38,8 @@ export class Rewards {
                     return {
                         name: translate(locale, key, undefined, userLocale),
                         value: isActive
-                            ? `${getIcon("clock")} ${translate(locale, "rewards.status.onCooldown", { time: time(cooldownEnd, TimestampStyles.RelativeTime) }, userLocale)}`
-                            : `${getIcon("clock_check")} ${translate(locale, "rewards.status.available"), userLocale}`,
+                            ? `${getIcon("clock")} ${translate(userLocale ?? locale, "rewards.status.onCooldown", { time: time(cooldownEnd, TimestampStyles.RelativeTime) })}`
+                            : `${getIcon("clock_check")} ${translate(userLocale ?? locale, "rewards.status.available")}`,
                     };
                 })
             );
