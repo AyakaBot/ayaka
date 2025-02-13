@@ -15,10 +15,10 @@ export class SetLanguage {
         defaultMemberPermissions: ["SendMessages"]
     })
     async run(
-        @SlashChoice({name: "English", value: "en-us"})
-        @SlashChoice({name: "Portuguese", value: "pt-br"})
-        @SlashChoice({name: "Spanish", value: "es-es"})
-        @SlashChoice({name: "Russian", value: "ru"})
+        @SlashChoice({ name: "English", value: "en-us" })
+        @SlashChoice({ name: "Portuguese", value: "pt-br" })
+        @SlashChoice({ name: "Spanish", value: "es-es" })
+        @SlashChoice({ name: "Russian", value: "ru" })
         @SlashOption({
             name: "language",
             nameLocalizations: getLocalizations("commands.language.options.language.name"),
@@ -27,8 +27,8 @@ export class SetLanguage {
             type: ApplicationCommandOptionType.String,
             required
         })
-        language: Languages, 
+        language: Languages,
         interaction: ChatInputCommandInteraction<"cached">) {
-        await launcher(interaction, language); 
+        await launcher(interaction, language);
     }
 }
