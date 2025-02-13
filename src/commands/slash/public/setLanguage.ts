@@ -1,6 +1,6 @@
 import { Languages } from "#database";
 import { getLocalizations } from "#translete";
-import { launcher } from "../../functions/setLanguage/launcher.js";
+import { execute } from "../../functions/setLanguage/launcher.js";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, InteractionContextType } from "discord.js";
 import { Discord, Slash, SlashChoice, SlashOption } from "discordx";
 
@@ -29,6 +29,6 @@ export class SetLanguage {
         })
         language: Languages,
         interaction: ChatInputCommandInteraction<"cached">) {
-        await launcher(interaction, language);
+        await execute(interaction, language);
     }
 }

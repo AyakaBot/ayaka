@@ -36,7 +36,7 @@ export class Rewards {
                 Object.entries(cooldowns).map(([type, { isActive, cooldownEnd }]) => {
                     const key = `rewards.types.${type.toLowerCase()}.name`;
                     return {
-                        name: translate(locale, key, undefined, userLocale),
+                        name: translate(userLocale ?? locale, key),
                         value: isActive
                             ? `${getIcon("clock")} ${translate(userLocale ?? locale, "rewards.status.onCooldown", { time: time(cooldownEnd, TimestampStyles.RelativeTime) })}`
                             : `${getIcon("clock_check")} ${translate(userLocale ?? locale, "rewards.status.available")}`,

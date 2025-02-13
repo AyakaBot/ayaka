@@ -3,7 +3,7 @@ import { colors } from "#settings";
 import { translate } from "#translete";
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 
-export async function launcher(interaction: ChatInputCommandInteraction<"cached">, language: Languages | undefined) {
+export async function execute(interaction: ChatInputCommandInteraction<"cached">, language: Languages | undefined) {
     await interaction.deferReply({ flags });
 
     const { locale, user } = interaction;

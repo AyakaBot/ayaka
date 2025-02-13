@@ -1,7 +1,21 @@
 {
   "client": {
     "messages": {
-      "ping": "Pong! Minha latência é de {ping}ms"
+      "ping": "Pong! Minha latência é de {ping}ms",
+      "botMention": {
+        "description": "### Olá, {user}! Meu nome é {ayaka}\n- **Sou um bot projetado para entreter seu servidor com vários minijogos.**",
+        "footerText": "Feito com ♥ por {owner}",
+        "fields": {
+          "language": {
+            "name": "Idioma atual",
+            "value": "{userLocale}"
+          },
+          "library": {
+            "name": "Fui feito com",
+            "value": "TypeScript & Discordx"
+          }
+        }
+      }
     }
   },
   "user": {

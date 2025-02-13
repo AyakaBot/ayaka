@@ -22,8 +22,7 @@ export async function getOrCreateUser(userId: string) {
     return user;
 }
 
-
-export async function getUserLocale(user: User): Promise<Locale> {
+export async function getUserLocale(user: User): Promise<Locale | null> {
     try {
         const userDoc = await getOrCreateUser(user.id);
 
@@ -35,17 +34,15 @@ export async function getUserLocale(user: User): Promise<Locale> {
                 case "pt-br": return Locale.PortugueseBR;
                 case "es-es": return Locale.SpanishES;
                 case "ru": return Locale.Russian;
-                default:
-                    console.warn(`Invalid language in DB for user ${user.id}: ${userLanguage}`);
-                    return Locale.EnglishUS;
+                default: return null;
             }
         }
 
         console.warn(`Missing language in DB for user ${user.id}`);
-        return Locale.EnglishUS;
+        return null; 
     } catch (error) {
         console.error(`Failed to fetch user language for ${user.id}:`, error);
-        return Locale.EnglishUS;
+        return null; 
     }
 }
 

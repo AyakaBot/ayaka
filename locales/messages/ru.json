@@ -1,7 +1,21 @@
 {
     "client": {
         "messages": {
-            "ping": "Понг! Моя задержка {ping}мс"
+            "ping": "Понг! Моя задержка {ping}мс",
+            "botMention": {
+                "description": "### Привет, {user}! Меня зовут {ayaka}\n- **Я бот, созданный для развлечения вашего сервера различными мини-играми.**",
+                "footerText": "Сделано с ♥ от {owner}",
+                "fields": {
+                    "language": {
+                        "name": "Текущий язык",
+                        "value": "{userLocale}"
+                    },
+                    "library": {
+                        "name": "Я сделан с помощью",
+                        "value": "TypeScript & Discordx"
+                    }
+                }
+            }
         }
     },
     "user": {
