@@ -1,5 +1,5 @@
 import { dirname, importx } from "@discordx/importer";
-import { ActivityType, Interaction, Message } from "discord.js";
+import { ActivityType, Interaction, Message, TextChannel } from "discord.js";
 import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
 import "#database";
@@ -20,7 +20,7 @@ export const bot = new Client({
     //     prefix: []
     // },
     silent: false,
-    botGuilds: [process.env.DEV_GUILD],
+    botGuilds: [process.env.DEV_GUILD, "1301901686226419843"],
     presence: {
         activities: [{
             name: "with your heart",
@@ -33,8 +33,16 @@ bot.once("ready", () => {
     void bot.initApplicationCommands();
 });
 
-bot.on("interactionCreate", (interaction: Interaction) => {
-    bot.executeInteraction(interaction);
+bot.on("interactionCreate", async (interaction: Interaction) => {
+    try {
+        await bot.executeInteraction(interaction);
+    } catch (error) {
+        console.error("Error handling interaction:", error);
+        const channelId = interaction.channel?.id;
+        const channel = await interaction.guild?.channels.fetch(channelId!) as TextChannel;
+
+        channel.send({ content: `Error handling interaction: ${error}` });
+    }
 });
 
 // bot.on("messageCreate", (message: Message) => {
