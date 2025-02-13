@@ -4,6 +4,13 @@ import { translate } from "#translete";
 import { EmbedBuilder, Events, Locale, User } from "discord.js";
 import { ArgsOf, Client, Discord, On } from "discordx";
 
+const localeMap: Record<string, string> = {
+    "en-us": "English",
+    "pt-br": "Portuguese",
+    "es-es": "Spanish",
+    "ru": "Russian",
+};
+
 @Discord()
 export class BotMention {
     @On({ event: Events.MessageCreate })
@@ -19,6 +26,8 @@ export class BotMention {
     }
 
     private createEmbed(client: Client, author: User, userLocale: Locale | null): EmbedBuilder {
+        const userLanguage = localeMap[userLocale?.toString().toLowerCase() ?? "en-us"] || "English";
+
         return new EmbedBuilder()
             .setThumbnail(client.user!.displayAvatarURL())
             .setColor(colors.bravery)
@@ -29,19 +38,17 @@ export class BotMention {
             .setFooter({
                 text: translate(userLocale ?? Locale.EnglishUS, "client.messages.botMention.footerText", { owner: "piod" })
             })
-            .addFields([
-                {
-                    name: translate(userLocale ?? Locale.EnglishUS, "client.messages.botMention.fields.language.name"),
-                    value: translate(userLocale ?? Locale.EnglishUS, "client.messages.botMention.fields.language.value", {
-                        userLocale: userLocale?.toString() ?? Locale.EnglishUS
-                    }),
-                    inline: true
-                },
-                {
-                    name: translate(userLocale ?? Locale.EnglishUS, "client.messages.botMention.fields.library.name"),
-                    value: translate(userLocale ?? Locale.EnglishUS, "client.messages.botMention.fields.library.value"),
-                    inline: true
-                }
-            ]);
+            .addFields([{
+                name: translate(userLocale ?? Locale.EnglishUS, "client.messages.botMention.fields.language.name"),
+                value: translate(userLocale ?? Locale.EnglishUS, "client.messages.botMention.fields.language.value", {
+                    userLocale: userLanguage
+                }),
+                inline: true
+            },
+            {
+                name: translate(userLocale ?? Locale.EnglishUS, "client.messages.botMention.fields.library.name"),
+                value: translate(userLocale ?? Locale.EnglishUS, "client.messages.botMention.fields.library.value"),
+                inline: true
+            }]);
     }
 }
