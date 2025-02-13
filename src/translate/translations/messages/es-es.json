@@ -1,0 +1,68 @@
+{
+    "client": {
+        "messages": {
+            "ping": "¡Pong! Mi latencia es de {ping}ms"
+        }
+    },
+    "user": {
+        "economy": {
+            "wallet": "{targetUser} tiene: {pamonhas} pamonhas y está en la posición 🏆 #{userPosition} en el ranking.",
+            "transfer": {
+                "success": {
+                    "title": "Transferencia completada",
+                    "description": "{payerUser} transfirió **{value} pamonhas** a {targetUser}."
+                },
+                "error": {
+                    "title": "Error de transferencia"
+                }
+            },
+            "errors": {
+                "pay": {
+                    "selfTransfer": "No puedes transferir pamonhas a ti mismo.",
+                    "invalidValue": "El valor debe ser mayor que cero.",
+                    "unknown": "Ocurrió un error desconocido.",
+                    "processing": "Ocurrió un error al procesar la transferencia.",
+                    "botTransfer": "No puedes transferir tamales a bots.",
+                    "botWallet": "Los bots no tienen billetera."
+                }
+            }
+        }
+    },
+    "rewards": {
+        "available": {
+            "title": "Recompensas disponibles",
+            "description": "Aquí están tus recompensas disponibles:"
+        },
+        "status": {
+            "available": "Disponible",
+            "onCooldown": "En enfriamiento hasta {time}"
+        },
+        "types": {
+            "daily": {
+                "name": "Recompensa diaria"
+            },
+            "weekly": {
+                "name": "Recompensa semanal"
+            },
+            "monthly": {
+                "name": "Recompensa mensual"
+            }
+        },
+        "collected": {
+            "title": "Recompensa recolectada",
+            "description": "Has recolectado {amount} pamonhas."
+        },
+        "button": {
+            "label": {
+                "daily": "Diaria",
+                "weekly": "Semanal",
+                "monthly": "Mensual"
+            }
+        }
+    },
+    "set_language": {
+        "embed": {
+            "description": "El idioma ha sido configurado a Espanhol."
+        }
+    }
+}

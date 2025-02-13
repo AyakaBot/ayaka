@@ -1,9 +1,9 @@
-import { db, getUserLocale } from "#database";
+import { db, getUserLocale, Languages } from "#database";
 import { colors } from "#settings";
 import { translate } from "#translete";
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 
-export async function launcher(interaction: ChatInputCommandInteraction<"cached">, language: "en-us" | "pt-br" | undefined) {
+export async function launcher(interaction: ChatInputCommandInteraction<"cached">, language: Languages | undefined) {
     await interaction.deferReply({ flags });
 
     const { locale, user } = interaction;

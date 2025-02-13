@@ -1,3 +1,5 @@
+export type Languages = "en-us" | "pt-br" | "es-es" | "ru";
+
 export interface UserDocument {
     wallet?: {
         pamonhas: number
@@ -10,6 +12,6 @@ export interface UserDocument {
         }
     },
     options?: {
-        language?: "en-us" | "pt-br" 
+        language?: Languages
     }
 }

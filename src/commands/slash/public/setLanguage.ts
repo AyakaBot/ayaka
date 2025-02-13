@@ -1,3 +1,4 @@
+import { Languages } from "#database";
 import { getLocalizations } from "#translete";
 import { launcher } from "../../functions/setLanguage/launcher.js";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, InteractionContextType } from "discord.js";
@@ -14,7 +15,10 @@ export class SetLanguage {
         defaultMemberPermissions: ["SendMessages"]
     })
     async run(
-        @SlashChoice("en-us", "pt-br") 
+        @SlashChoice({name: "English", value: "en-us"})
+        @SlashChoice({name: "Portuguese", value: "pt-br"})
+        @SlashChoice({name: "Spanish", value: "es-es"})
+        @SlashChoice({name: "Russian", value: "ru"})
         @SlashOption({
             name: "language",
             nameLocalizations: getLocalizations("commands.language.options.language.name"),
@@ -23,7 +27,7 @@ export class SetLanguage {
             type: ApplicationCommandOptionType.String,
             required
         })
-        language: "en-us" | "pt-br", 
+        language: Languages, 
         interaction: ChatInputCommandInteraction<"cached">) {
         await launcher(interaction, language); 
     }

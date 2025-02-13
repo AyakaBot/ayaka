@@ -1,0 +1,46 @@
+{
+    "commands": {
+        "ping": {
+            "description": "Hace ping al bot.",
+            "name": "ping"
+        },
+        "wallet": {
+            "description": "Muestra el saldo de monedas del usuario.",
+            "name": "billetera",
+            "options": {
+                "usuario": {
+                    "description": "El usuario al que mostrar el saldo.",
+                    "name": "objetivo"
+                }
+            }
+        },
+        "rewards": {
+            "description": "Recoge tus recompensas.",
+            "name": "recompensas"
+        },
+        "pay": {
+            "description": "Paga a alguien.",
+            "name": "pagar",
+            "options": {
+                "user": {
+                    "description": "El usuario al que pagar.",
+                    "name": "objetivo"
+                },
+                "amount": {
+                    "description": "La cantidad de pamonhas a pagar.",
+                    "name": "cantidad"
+                }
+            }
+        },
+        "language": {
+            "description": "Configura el idioma del bot.",
+            "name": "configuraridioma",
+            "options": {
+                "language": {
+                    "description": "El idioma para configurar.",
+                    "name": "idioma"
+                }
+            }
+        }
+    }
+}
