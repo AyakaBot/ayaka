@@ -18,6 +18,6 @@ export class Ping {
 
         const userLocale = await getUserLocale(user);
 
-        await interaction.reply(translate(locale, "client.messages.ping", { ping: client.ws.ping }, userLocale ?? undefined));
+        await interaction.reply(translate(locale, "client.messages.ping", { ping: client.ws.ping }, userLocale));
     }
 }
