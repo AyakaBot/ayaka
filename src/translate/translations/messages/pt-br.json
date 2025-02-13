@@ -59,5 +59,10 @@
         "monthly": "Mensal"
       }
     }
+  },
+  "set_language": {
+    "embed": {
+      "description": "Meu idioma foi setado para Português."
+    }
   }
 }

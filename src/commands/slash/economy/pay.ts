@@ -2,57 +2,58 @@ import {
     ApplicationCommandOptionType,
     ChatInputCommandInteraction,
     User,
-    GuildMember,
     InteractionContextType,
 } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 import { processTransfer } from "../../functions/pay/pay.js";
 import { getLocalizations, translate } from "#translete";
+import { getUserLocale } from "#database";
 
 @Discord()
 export class Pay {
     @Slash({
         name: "pay",
-        nameLocalizations: getLocalizations("pay.name"),
+        nameLocalizations: getLocalizations("commands.pay.name"),
         description: "Send pamonhas to another user",
-        descriptionLocalizations: getLocalizations("pay.description"),
+        descriptionLocalizations: getLocalizations("commands.pay.description"),
         contexts: [InteractionContextType.Guild],
         defaultMemberPermissions: ["SendMessages"]
     })
     async run(
         @SlashOption({
             name: "target",
-            nameLocalizations: getLocalizations("pay.options.user.name"),
+            nameLocalizations: getLocalizations("commands.pay.options.user.name"),
             description: "Target user to send pamonhas",
-            descriptionLocalizations: getLocalizations("pay.options.user.description"),
+            descriptionLocalizations: getLocalizations("commands.pay.options.user.description"),
             type: ApplicationCommandOptionType.User,
             required,
         })
         target: User,
         @SlashOption({
             name: "value",
-            nameLocalizations: getLocalizations("pay.options.amount.name"),
+            nameLocalizations: getLocalizations("commands.pay.options.amount.name"),
             description: "Value of pamonhas to transfer",
-            descriptionLocalizations: getLocalizations("pay.options.amount.description"),
+            descriptionLocalizations: getLocalizations("commands.pay.options.amount.description"),
             type: ApplicationCommandOptionType.Number,
             required,
         })
         value: number,
         interaction: ChatInputCommandInteraction<"cached">
     ) {
-        const { locale } = interaction;
+        const { locale, user } = interaction;
+        const userLocale = await getUserLocale(user);
 
         const targetMember = await interaction.guild.members.fetch(target.id);
         if (targetMember.user.bot) {
             return interaction.reply({
                 flags,
-                content: translate(locale, "user.economy.errors.pay.botTransfer"),
+                content: translate(locale, "user.economy.errors.pay.botTransfer", undefined, userLocale),
             });
         }
 
         await interaction.deferReply();
 
-        const { content, embed } = await processTransfer(interaction, target, value, locale);
+        const { content, embed } = await processTransfer(interaction, target, value, locale, userLocale);
 
         if (content) {
             await interaction.editReply({ content });

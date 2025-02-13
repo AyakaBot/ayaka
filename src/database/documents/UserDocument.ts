@@ -1,5 +1,5 @@
 export interface UserDocument {
-    wallet: {
+    wallet?: {
         pamonhas: number
     },
     cooldowns?: {
@@ -8,5 +8,8 @@ export interface UserDocument {
             lastClaimWeekly: Date
             lastClaimMonthly: Date
         }
+    },
+    options?: {
+        language?: "en-us" | "pt-br" 
     }
 }

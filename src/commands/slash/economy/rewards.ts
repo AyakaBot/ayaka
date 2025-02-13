@@ -1,6 +1,6 @@
 import { ButtonInteraction, ChatInputCommandInteraction, EmbedBuilder, InteractionContextType, time, TimestampStyles } from "discord.js";
 import { ButtonComponent, Discord, Slash } from "discordx";
-import { getOrCreateUser } from "#database";
+import { getOrCreateUser, getUserLocale } from "#database";
 import { colors, getIcon } from "#settings";
 import { claimReward, getButtonCooldown, createButtonRow, generateRandomReward } from "../../functions/rewards/rewards.js";
 import { getLocalizations, translate } from "#translete";
@@ -9,9 +9,9 @@ import { getLocalizations, translate } from "#translete";
 export class Rewards {
     @Slash({
         name: "rewards",
-        nameLocalizations: getLocalizations("rewards.name"),
+        nameLocalizations: getLocalizations("commands.rewards.name"),
         description: "Claim your rewards",
-        descriptionLocalizations: getLocalizations("rewards.description"),
+        descriptionLocalizations: getLocalizations("commands.rewards.description"),
         defaultMemberPermissions: ["SendMessages"],
         contexts: [InteractionContextType.Guild],
     })
@@ -19,6 +19,7 @@ export class Rewards {
         await interaction.deferReply({ flags });
 
         const user = await getOrCreateUser(interaction.member.id);
+        const userLocale = await getUserLocale(interaction.user);
         const { locale } = interaction;
 
         const cooldowns = {
@@ -28,22 +29,22 @@ export class Rewards {
         };
 
         const embed = new EmbedBuilder()
-            .setTitle(translate(locale, "rewards.available.title"))
-            .setDescription(translate(locale, "rewards.available.description"))
+            .setTitle(translate(locale, "rewards.available.title", undefined, userLocale))
+            .setDescription(translate(locale, "rewards.available.description", undefined, userLocale))
             .setColor(colors.success)
             .addFields(
                 Object.entries(cooldowns).map(([type, { isActive, cooldownEnd }]) => {
                     const key = `rewards.types.${type.toLowerCase()}.name`;
                     return {
-                        name: translate(locale, key),
+                        name: translate(locale, key, undefined, userLocale),
                         value: isActive
-                            ? `${getIcon("clock")} ${translate(locale, "rewards.status.onCooldown", { time: time(cooldownEnd, TimestampStyles.RelativeTime) })}`
-                            : `${getIcon("clock_check")} ${translate(locale, "rewards.status.available")}`,
+                            ? `${getIcon("clock")} ${translate(locale, "rewards.status.onCooldown", { time: time(cooldownEnd, TimestampStyles.RelativeTime) }, userLocale)}`
+                            : `${getIcon("clock_check")} ${translate(locale, "rewards.status.available"), userLocale}`,
                     };
                 })
             );
 
-        const row = createButtonRow(locale, cooldowns);
+        const row = createButtonRow(locale, cooldowns, userLocale);
 
         await interaction.editReply({ embeds: [embed], components: [row] });
     }

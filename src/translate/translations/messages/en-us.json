@@ -59,5 +59,11 @@
                 "monthly": "Monthly"
             }
         }
+    },
+
+    "set_language": {
+        "embed": {
+            "description": "The language has been set to English."
+        }
     }
 }

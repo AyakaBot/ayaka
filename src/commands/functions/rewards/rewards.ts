@@ -1,8 +1,8 @@
 import { ButtonInteraction } from "discord.js";
-import { getOrCreateUser, isCooldownActive, updateUserCooldown, updateUserPamonhas } from "#database";
+import { getOrCreateUser, getUserLocale, isCooldownActive, updateUserCooldown, updateUserPamonhas } from "#database";
 import { colors, icon } from "#settings";
 import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
-import { translate } from "#translete"; 
+import { translate } from "#translete";
 
 export function toCooldownType(type: string): "daily" | "weekly" | "monthly" {
     if (type === "daily" || type === "weekly" || type === "monthly") {
@@ -23,12 +23,12 @@ export function getButtonCooldown(user: any, type: "Daily" | "Weekly" | "Monthly
     return { isActive: false, cooldownEnd: new Date() };
 }
 
-export function createButtonRow(locale: string, cooldowns: Record<string, { isActive: boolean }>) {
+export function createButtonRow(locale: string, cooldowns: Record<string, { isActive: boolean }>, userLocale?: string | null) {
     return new ActionRowBuilder<ButtonBuilder>().addComponents(
         Object.entries(cooldowns).map(([type, { isActive }]) =>
             new ButtonBuilder()
                 .setCustomId(type.toLowerCase())
-                .setLabel(translate(locale, `rewards.button.label.${type.toLowerCase()}`))
+                .setLabel(translate(locale, `rewards.button.label.${type.toLowerCase()}`, undefined, userLocale))
                 .setEmoji(icon.dolar)
                 .setStyle(
                     type === "Daily"
@@ -45,12 +45,14 @@ export function createButtonRow(locale: string, cooldowns: Record<string, { isAc
 export async function claimReward(interaction: ButtonInteraction<"cached">, type: "Daily" | "Weekly" | "Monthly", amount: number) {
     const { locale } = interaction;
 
+    const userLocale = await getUserLocale(interaction.user);
+
     await updateUserPamonhas(interaction.member.id, amount);
     await updateUserCooldown(interaction.member.id, type);
 
     const embed = new EmbedBuilder()
-        .setTitle(translate(locale, `rewards.collected.title`, { type }))
-        .setDescription(translate(locale, `rewards.collected.description`, { amount }))
+        .setTitle(translate(locale, `rewards.collected.title`, { type }, userLocale))
+        .setDescription(translate(locale, `rewards.collected.description`, { amount }, userLocale))
         .setColor(colors.success);
 
     const userUpdated = await getOrCreateUser(interaction.member.id);

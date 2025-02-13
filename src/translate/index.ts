@@ -20,8 +20,7 @@ export function loadTranslations(directory: string) {
 
         if (stat.isDirectory()) {
             loadTranslations(filePath);
-        } 
-        else if (file.endsWith(".json")) {
+        } else if (file.endsWith(".json")) {
             const locale = path.basename(file, ".json");
             const fileData = fs.readFileSync(filePath, "utf8");
 
@@ -39,11 +38,14 @@ loadTranslations(translationsDir);
 export function translate(
     locale: string,
     key: string,
-    placeholders?: Record<string, string | number>
+    placeholders?: Record<string, string | number>,
+    userLanguage?: string | null 
 ): string {
-    const localeTranslations = translations[locale.toLowerCase()] || translations["en-us"];
+    const targetLanguage = (userLanguage || locale).toLowerCase();
+
+    const localeTranslations = translations[targetLanguage] || translations["en-us"];
     if (!localeTranslations) {
-        return `Missing locale: ${locale} and fallback locale: en-us`;
+        return `Missing locale: ${targetLanguage} and fallback locale: en-us`;
     }
 
     const keys = key.split(".");
