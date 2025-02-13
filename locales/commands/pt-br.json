@@ -45,6 +45,18 @@
         "help": {
             "description": "Veja meus comandos e algumas iformações",
             "name": "ajuda"
+        },
+        "memory": {
+            "principal_name": "memória",
+            "principal_description": "Jogar o jogo da memória",
+            "alone": {
+                "name": "sozinho",
+                "description": "Jogar sozinho."
+            },
+            "cooperative": {
+                "name": "cooperativo",
+                "description": "jogar com um amigo"
+            }
         }
     }
 }

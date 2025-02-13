@@ -16,7 +16,7 @@ type CommandCategory = {
 
 const getCommandCategories = (locale: string): CommandCategory[] => [
     {
-        name: translate(locale, "help.commands.general.title"),
+        name: translate(locale, "help.commands.general"),
         commands: [
             { name: translate(locale, "commands.help.name"), description: translate(locale, "commands.help.description") },
             { name: translate(locale, "commands.ping.name"), description: translate(locale, "commands.ping.description") },
@@ -24,11 +24,18 @@ const getCommandCategories = (locale: string): CommandCategory[] => [
         ],
     },
     {
-        name: translate(locale, "help.commands.economy.title"),
+        name: translate(locale, "help.commands.economy"),
         commands: [
             { name: translate(locale, "commands.wallet.name"), description: translate(locale, "commands.wallet.description") },
             { name: translate(locale, "commands.pay.name"), description: translate(locale, "commands.pay.description") },
             { name: translate(locale, "commands.rewards.name"), description: translate(locale, "commands.rewards.description") },
+        ],
+    },
+    {
+        name: translate(locale, "help.commands.games"),
+        commands: [
+            { name: translate(locale, "commands.memory.principal_name") + " " + translate(locale, "commands.memory.alone.name"), description: translate(locale, "commands.memory.alone.description") },
+            { name: translate(locale, "commands.memory.principal_name") + " " + translate(locale, "commands.memory.cooperative.name"), description: translate(locale, "commands.memory.cooperative.description") },
         ],
     },
 ];

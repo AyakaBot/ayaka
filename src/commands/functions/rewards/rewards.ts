@@ -62,7 +62,7 @@ export async function claimReward(interaction: ButtonInteraction<"cached">, type
         Monthly: getButtonCooldown(userUpdated, "Monthly"),
     };
 
-    const row = createButtonRow(locale, updatedCooldowns);
+    const row = createButtonRow(userLocale ?? locale, updatedCooldowns);
 
     await interaction.update({ embeds: [embed], components: [row] });
 }

@@ -23,6 +23,18 @@
         "help": {
             "description": "See my commands and some information",
             "name": "help"
+        },
+        "memory": {
+            "principal_name": "memory",
+            "principal_escription": "Play the memory game",
+            "alone": {
+                "name": "alone",
+                "description": "Play alone."
+            },
+            "cooperative": {
+                "name": "cooperative",
+                "description": "play with a friend"
+            }
         }
     }
 }

@@ -81,12 +81,9 @@
     },
     "help": {
         "commands": {
-            "general": {
-                "title": "Общее"
-            },
-            "economy": {
-                "title": "Экономика"
-            }
+            "general": "Общее",
+            "economy": "Экономика",
+            "games": "Игры"
         },
         "embed": {
             "categoryTitle": "{category}",
@@ -95,6 +92,27 @@
             "commands": "Команды",
             "instructions": "Используйте кнопки ниже для навигации по командам.",
             "footer": "Страница {page} из {totalPages}"
+        }
+    },
+    "memory": {
+        "alone": {
+            "embed": {
+                "description_init_game": "Найдите все пары эмодзи!",
+                "description_finish_game": "Поздравляю! Вы завершили игру за {attempts} попыток."
+            },
+            "timeout": "{clock} Время вышло! Игра завершена."
+        },
+        "cooperative": {
+            "embed": {
+                "description_init_game": "**Ход:** {currentPlayer}\n**Счет:**\n{author}: {authorScore} очков\n{friend}: {friendScore} очков\n",
+                "description_finish_game": "Поздравляю! {user} и {friend} завершили игру за {attempts} попыток.\n**Итоговый счет:**\n{author}: {authorScore} очков\n{friendFinal}: {friendScore} очков",
+                "description_timeout": "Время вышло! Игра завершена.\n**Итоговый счет:**\n{author}: {authorScore} очков\n{friend}: {friendScore} очков",
+                "description_turn": "{currentPlayer} собрал пару и получает еще один ход!\n**Счет:**\n{author}: {authorScore} очков\n{friend}: {friendScore} очков"
+            },
+            "errors": {
+                "self_play": "Вы не можете играть против себя!",
+                "bot": "Вы не можете играть против бота!"
+            }
         }
     }
 }

@@ -45,6 +45,18 @@
         "help": {
             "name": "помощь",
             "description": "Отображение справочного сообщения."
+        },
+        "memory": {
+            "principal_name": "память",
+            "principal_description": "Играть в игру на память",
+            "alone": {
+                "name": "один",
+                "description": "Играть одному."
+            },
+            "cooperative": {
+                "name": "кооперативный",
+                "description": "играть с другом"
+            }
         }
     }
 }

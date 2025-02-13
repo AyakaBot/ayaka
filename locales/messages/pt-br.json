@@ -81,12 +81,9 @@
   },
   "help": {
     "commands": {
-      "general": {
-        "title": "Geral"
-      },
-      "economy": {
-        "title": "Economia"
-      }
+      "general": "Geral",
+      "economy": "Economia",
+      "games": "Jogos"
     },
     "embed": {
       "categoryTitle": "{category}",
@@ -95,6 +92,27 @@
       "commands": "Comandos",
       "instructions": "Use os botões abaixo para navegar pelos comandos.",
       "footer": "Página {page} de {totalPages}"
+    }
+  },
+  "memory": {
+    "alone": {
+      "embed": {
+        "description_init_game": "Encontre todos os pares de emojis!",
+        "description_finish_game": "Parabéns! Você completou o jogo em {attempts} tentativas."
+      },
+      "timeout": "{clock} Tempo esgotado! O jogo foi encerrado."
+    },
+    "cooperative": {
+      "embed": {
+        "description_init_game": "**Vez de:** {currentPlayer}\n**Pontuação:**\n{author}: {authorScore} pontos\n{friend}: {friendScore} pontos\n",
+        "description_finish_game": "Parabéns! {user} e {friend} completaram o jogo em {attempts} tentativas.\n**Pontuação final:**\n{author}: {authorScore} pontos\n{friendFinal}: {friendScore} pontos",
+        "description_timeout": "Tempo esgotado! O jogo foi encerrado.\n**Pontuação final:**\n{author}: {authorScore} pontos\n{friend}: {friendScore} pontos",
+        "description_turn": "{currentPlayer} acertou um par e ganhou mais uma chance!\n**Pontuação:**\n{author}: {authorScore} pontos\n{friend}: {friendScore} pontos"
+      },
+      "errors": {
+        "self_play": "Você não pode jogar contra si mesmo!",
+        "bot": "Você não pode jogar contra um bot!"
+      }
     }
   }
 }

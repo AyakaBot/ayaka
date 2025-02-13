@@ -81,12 +81,9 @@
     },
     "help": {
         "commands": {
-            "general": {
-                "title": "General"
-            },
-            "economy": {
-                "title": "Economy"
-            }
+            "general": "General",
+            "economy": "Economy",
+            "games": "Games"
         },
         "embed": {
             "categoryTitle": "{category}",
@@ -95,6 +92,27 @@
             "commands": "Commands",
             "instructions": "Use the buttons below to navigate through commands.",
             "footer": "Page {page} of {totalPages}"
+        }
+    },
+    "memory": {
+        "alone": {
+            "embed": {
+                "description_init_game": "Find all the emoji pairs!",
+                "description_finish_game": "Congratulations! You completed the game in {attempts} attempts."
+            },
+            "timeout": "{clock} Time's up! The game has ended."
+        },
+        "cooperative": {
+            "embed": {
+                "description_init_game": "**Turn of:** {currentPlayer}\n**Score:**\n{author}: {authorScore} points\n{friend}: {friendScore} points\n",
+                "description_finish_game": "Congratulations! {user} and {friend} completed the game in {attempts} attempts.\n**Final score:**\n{author}: {authorScore} points\n{friendFinal}: {friendScore} points",
+                "description_timeout": "Time's up! The game has ended.\n**Final score:**\n{author}: {authorScore} points\n{friend}: {friendScore} points",
+                "description_turn": "{currentPlayer} matched a pair and gets another turn!\n**Score:**\n{author}: {authorScore} points\n{friend}: {friendScore} points"
+            },
+            "errors": {
+                "self_play": "You can't play against yourself!",
+                "bot": "You cannot play against a bot!"
+            }
         }
     }
 }

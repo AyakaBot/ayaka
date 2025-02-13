@@ -42,10 +42,21 @@
                 }
             }
         },
-
         "help": {
             "name": "ayuda",
             "description": "Muestra una mensaje de ayuda"
+        },
+        "memory": {
+            "principal_name": "memoria",
+            "principal_description": "Jugar el juego de la memoria",
+            "alone": {
+                "name": "solo",
+                "description": "Jugar solo."
+            },
+            "cooperative": {
+                "name": "cooperativo",
+                "description": "jugar con un amigo"
+            }
         }
     }
 }

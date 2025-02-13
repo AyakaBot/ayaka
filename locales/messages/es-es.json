@@ -81,12 +81,9 @@
     },
     "help": {
         "commands": {
-            "general": {
-                "title": "General"
-            },
-            "economy": {
-                "title": "Economía"
-            }
+            "general": "General",
+            "economy": "Economíad",
+            "games": "Juegos"
         },
         "embed": {
             "categoryTitle": "{category}",
@@ -95,6 +92,27 @@
             "commands": "Comandos",
             "instructions": "Usa los botones de abajo para navegar por los comandos.",
             "footer": "Página {page} de {totalPages}"
+        }
+    },
+    "memory": {
+        "alone": {
+            "embed": {
+                "description_init_game": "¡Encuentra todos los pares de emojis!",
+                "description_finish_game": "¡Felicidades! Completaste el juego en {attempts} intentos."
+            },
+            "timeout": "{clock} ¡Tiempo agotado! El juego ha terminado."
+        },
+        "cooperative": {
+            "embed": {
+                "description_init_game": "**Turno de:** {currentPlayer}\n**Puntuación:**\n{author}: {authorScore} puntos\n{friend}: {friendScore} puntos\n",
+                "description_finish_game": "¡Felicidades! {user} y {friend} completaron el juego en {attempts} intentos.\n**Puntuación final:**\n{author}: {authorScore} puntos\n{friendFinal}: {friendScore} puntos",
+                "description_timeout": "¡Tiempo agotado! El juego ha terminado.\n**Puntuación final:**\n{author}: {authorScore} puntos\n{friend}: {friendScore} puntos",
+                "description_turn": "{currentPlayer} acertó un par y obtiene otro turno!\n**Puntuación:**\n{author}: {authorScore} puntos\n{friend}: {friendScore} puntos"
+            },
+            "errors": {
+                "self_play": "¡No puedes jugar contra ti mismo!",
+                "bot": "¡No puedes jugar contra un bot!"
+            }
         }
     }
 }
