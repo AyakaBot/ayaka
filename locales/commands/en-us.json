@@ -43,6 +43,16 @@
                 "name": "bet",
                 "description": "Bet amount."
             }
+        },
+        "minecraft": {
+            "principal_description": "See a player's skin",
+            "description": "Get a Minecraft skin",
+            "options": {
+                "nick": {
+                    "name": "nick",
+                    "description": "Nickname of a player"
+                }
+            }
         }
     }
 }

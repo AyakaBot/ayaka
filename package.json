@@ -17,6 +17,7 @@
     "discord.js": "^14.17.3",
     "discordx": "^11.12.2",
     "firebase-admin": "^13.1.0",
+    "starlightskinapi": "^1.0.10",
     "typesaurus": "^10.7.0"
   },
   "devDependencies": {

@@ -129,5 +129,9 @@
         "bomb_collision": "💣 **Bomb found!** You lost your bet.",
         "collect_pamonhas": "🎉 **You collected {pamonhas} pamonhas!**",
         "collect_button": "Collect"
+    },
+    "minecraft": {
+        "footer": "Skin of {nickname} | Type: {type} | Crop: {crop}",
+        "not_found": "Could not obtain the skin of **{nickname}**"
     }
 }

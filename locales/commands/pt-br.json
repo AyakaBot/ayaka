@@ -65,6 +65,16 @@
                 "name": "aposta",
                 "description": "Quantidade da aposta."
             }
+        },
+        "minecraft": {
+            "principal_description": "Ver a skin de um jogador",
+            "description": "Obtenha uma skin do Minecraft",
+            "options": {
+                "nick": {
+                    "name": "nick",
+                    "description": "Apelido de um jogador"
+                }
+            }
         }
     }
 }

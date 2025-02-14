@@ -20,7 +20,7 @@ export const bot = new Client({
     //     prefix: []
     // },
     silent: true,
-    botGuilds: [process.env.DEV_GUILD, "1301901686226419843"],
+    botGuilds: [process.env.DEV_GUILD, process.env.SECOND_DEV_GUILD, process.env.LAB_GUILD],
     presence: {
         activities: [{
             name: "with your heart",
