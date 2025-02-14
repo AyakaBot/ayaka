@@ -1,4 +1,4 @@
-export type Languages = "en-us" | "pt-br" | "es-es" | "ru";
+export type Languages = "en-us" | "pt-br" | "es-es";
 
 export interface UserDocument {
     wallet?: {

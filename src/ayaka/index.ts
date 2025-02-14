@@ -30,6 +30,7 @@ export const bot = new Client({
 });
 
 bot.once("ready", () => {
+    console.log("Client is ready");
     void bot.initApplicationCommands();
 });
 

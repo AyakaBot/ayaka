@@ -35,6 +35,14 @@
                 "name": "cooperative",
                 "description": "play with a friend"
             }
+        },
+        "miner": {
+            "description": "Find the diamond!",
+            "name": "miner",
+            "options": {
+                "name": "bet",
+                "description": "Bet amount."
+            }
         }
     }
 }

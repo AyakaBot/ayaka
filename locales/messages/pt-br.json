@@ -114,5 +114,20 @@
         "bot": "Você não pode jogar contra um bot!"
       }
     }
+  },
+  "miner": {
+    "embed": {
+      "multiplier": "Multiplicador",
+      "bet": "Aposta",
+      "potencial": "Potencial",
+      "footer": "Clique nos botões para revelar diamantes ou bombas!"
+    },
+    "errors": {
+      "insufficient": "Você não tem pamonhas suficientes para fazer essa aposta.",
+      "timeout": "{clock} **Tempo esgotado! O jogo foi encerrado.**"
+    },
+    "bomb_collision": "💣 **Bomba encontrada!** Você perdeu sua aposta.",
+    "collect_pamonhas": "🎉 **Você coletou {pamonhas} pamonhas!**",
+    "collect_button": "Coletar"
   }
 }

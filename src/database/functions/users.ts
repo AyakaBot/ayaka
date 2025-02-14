@@ -33,7 +33,6 @@ export async function getUserLocale(user: User): Promise<Locale | null> {
                 case "en-us": return Locale.EnglishUS;
                 case "pt-br": return Locale.PortugueseBR;
                 case "es-es": return Locale.SpanishES;
-                case "ru": return Locale.Russian;
                 default: return null;
             }
         }

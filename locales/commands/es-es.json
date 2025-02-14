@@ -57,6 +57,14 @@
                 "name": "cooperativo",
                 "description": "jugar con un amigo"
             }
+        },
+        "miner": {
+            "description": "¡Encuentra el diamante!",
+            "name": "miner",
+            "options": {
+                "name": "apuesta",
+                "description": "Cantidad de la apuesta."
+            }
         }
     }
 }

@@ -18,7 +18,6 @@ export class SetLanguage {
         @SlashChoice({ name: "English", value: "en-us" })
         @SlashChoice({ name: "Portuguese", value: "pt-br" })
         @SlashChoice({ name: "Spanish", value: "es-es" })
-        @SlashChoice({ name: "Russian", value: "ru" })
         @SlashOption({
             name: "language",
             nameLocalizations: getLocalizations("commands.language.options.language.name"),

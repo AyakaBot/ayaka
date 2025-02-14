@@ -114,5 +114,20 @@
                 "bot": "You cannot play against a bot!"
             }
         }
+    },
+    "miner": {
+        "embed": {
+            "multiplier": "Multiplier",
+            "bet": "Bet",
+            "potencial": "Potential",
+            "footer": "Click the buttons to reveal diamonds or bombs!"
+        },
+        "errors": {
+            "insufficient": "You do not have enough pamonhas to make this bet.",
+            "timeout": "{clock} **Time's up! The game has ended.**"
+        },
+        "bomb_collision": "💣 **Bomb found!** You lost your bet.",
+        "collect_pamonhas": "🎉 **You collected {pamonhas} pamonhas!**",
+        "collect_button": "Collect"
     }
 }

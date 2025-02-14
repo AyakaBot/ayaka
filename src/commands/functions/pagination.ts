@@ -12,7 +12,8 @@ import {
 export enum PaginationButtonIds {
     Previous = "previous",
     Next = "next",
-    Close = "close"
+    Close = "close",
+    Home = "home" 
 }
 
 export interface PaginationOptions {
@@ -34,9 +35,14 @@ export async function createPagination(message: InteractionCallbackResponse, opt
                 .setStyle(ButtonStyle.Secondary)
                 .setDisabled(currentPage === 1),
             new ButtonBuilder()
+                .setCustomId(PaginationButtonIds.Home)
+                .setEmoji(icon.home)
+                .setStyle(ButtonStyle.Secondary)
+                .setDisabled(currentPage === 1), 
+            new ButtonBuilder()
                 .setCustomId(PaginationButtonIds.Next)
                 .setEmoji(icon.arrowRight)
-                .setStyle(ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Secondary)
                 .setDisabled(currentPage === pages.length),
             new ButtonBuilder()
                 .setCustomId(PaginationButtonIds.Close)
@@ -56,18 +62,21 @@ export async function createPagination(message: InteractionCallbackResponse, opt
     });
 
     collector?.on("collect", async (i) => {
-        if (i.user.id !== user.id) return;
+        if (i.user.id !== user.id) return; 
 
         switch (i.customId) {
             case PaginationButtonIds.Previous:
                 currentPage--;
                 break;
+            case PaginationButtonIds.Home:
+                currentPage = 1;
+                break;
             case PaginationButtonIds.Next:
-                currentPage++;
+                currentPage++; 
                 break;
             case PaginationButtonIds.Close:
                 await i.update({ components: [] });
-                collector.stop();
+                collector.stop(); 
                 return;
         }
 
