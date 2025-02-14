@@ -34,15 +34,8 @@ bot.once("ready", () => {
 });
 
 bot.on("interactionCreate", async (interaction: Interaction) => {
-    try {
-        await bot.executeInteraction(interaction);
-    } catch (error) {
-        console.error("Error handling interaction:", error);
-        const channelId = interaction.channel?.id;
-        const channel = await interaction.guild?.channels.fetch(channelId!) as TextChannel;
+    await bot.executeInteraction(interaction);
 
-        channel.send({ content: `Error handling interaction: ${error}` });
-    }
 });
 
 // bot.on("messageCreate", (message: Message) => {
