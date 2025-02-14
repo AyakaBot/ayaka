@@ -15,9 +15,12 @@ const localeMap: Record<string, string> = {
 export class BotMention {
     @On({ event: Events.MessageCreate })
     async run([message]: ArgsOf<Events.MessageCreate>, client: Client) {
-        const { mentions, author } = message;
+        const { mentions, author, content } = message;
 
         if (!mentions.has(client.user!.id) || author.bot) return;
+
+        const botMention = `<@${client.user!.id}>`;
+        if (content.trim() !== botMention) return;
 
         const userLocale = await getUserLocale(author);
         const embed = this.createEmbed(client, author, userLocale);

@@ -44,7 +44,6 @@ export async function getUserLocale(user: User): Promise<Locale | null> {
             }
         }
 
-        console.warn(`Missing language in DB for user ${user.id}`);
         return null;
     } catch (error) {
         console.error(`Failed to fetch user language for ${user.id}:`, error);
