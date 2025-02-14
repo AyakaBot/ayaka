@@ -20,6 +20,7 @@ const getCommandCategories = (locale: string): CommandCategory[] => [
         commands: [
             { name: translate(locale, "commands.help.name"), description: translate(locale, "commands.help.description") },
             { name: translate(locale, "commands.ping.name"), description: translate(locale, "commands.ping.description") },
+            { name: "minecraft skin", description: translate(locale, "commands.minecraft.description") },
             { name: translate(locale, "commands.language.name"), description: translate(locale, "commands.language.description") },
         ],
     },
