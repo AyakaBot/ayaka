@@ -2,7 +2,7 @@ import { ButtonInteraction } from "discord.js";
 import { getOrCreateUser, getUserLocale, isCooldownActive, updateUserCooldown, updateUserPamonhas } from "#database";
 import { colors, icon } from "#settings";
 import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
-import { translate } from "#translete";
+import { translate } from "#translate";
 
 export function toCooldownType(type: string): "daily" | "weekly" | "monthly" {
     if (type === "daily" || type === "weekly" || type === "monthly") {

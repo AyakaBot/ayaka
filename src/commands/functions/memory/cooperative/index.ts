@@ -3,7 +3,7 @@ import { getRandomEmojis } from "../emojis.js";
 import { GameConfig, GameState } from "./types.js";
 import { updateEmbed, createGrid, isGameOver } from "./utils.js";
 import { getUserLocale } from "#database";
-import { translate } from "#translete";
+import { translate } from "#translate";
 
 export async function executeCooperative(interaction: ChatInputCommandInteraction<"cached">, friendUser: User) {
     const { user, client, locale } = interaction;

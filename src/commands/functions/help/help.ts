@@ -1,6 +1,6 @@
 import { getUserLocale } from "#database";
 import { colors } from "#settings";
-import { translate } from "#translete";
+import { translate } from "#translate";
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import { createPagination } from "../pagination.js";
 

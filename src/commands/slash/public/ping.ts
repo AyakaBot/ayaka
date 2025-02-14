@@ -1,5 +1,5 @@
 import { getUserLocale } from "#database";
-import { getLocalizations, translate } from "#translete";
+import { getLocalizations, translate } from "#translate";
 import { ChatInputCommandInteraction, InteractionContextType } from "discord.js";
 import { Discord, Slash } from "discordx";
 

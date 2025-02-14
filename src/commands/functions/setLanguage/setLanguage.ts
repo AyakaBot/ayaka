@@ -1,6 +1,6 @@
 import { db, getUserLocale, Languages } from "#database";
 import { colors } from "#settings";
-import { translate } from "#translete";
+import { translate } from "#translate";
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 
 export async function execute(interaction: ChatInputCommandInteraction<"cached">, language: Languages | undefined) {

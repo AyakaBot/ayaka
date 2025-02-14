@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, EmbedBuilder, User } from "discord.js";
 import { db, transferPamonhas } from "#database";
 import { colors } from "#settings";
-import { translate } from "#translete";
+import { translate } from "#translate";
 
 export async function processTransfer(
     interaction: ChatInputCommandInteraction<"cached">,

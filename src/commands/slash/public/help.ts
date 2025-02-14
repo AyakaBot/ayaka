@@ -1,4 +1,4 @@
-import { getLocalizations } from "#translete";
+import { getLocalizations } from "#translate";
 import { ChatInputCommandInteraction, InteractionContextType } from "discord.js";
 import { Discord, Slash } from "discordx";
 import { execute } from "../../functions/help/help.js";

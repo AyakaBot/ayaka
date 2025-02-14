@@ -18,7 +18,7 @@
     "paths": {
       "#database": ["./database/index.ts"],
       "#settings": ["./settings/index.ts"],
-      "#translete": ["./translate/index.ts"]
+      "#translate": ["./translate/index.ts"]
     }
   },
   "include": ["./"],

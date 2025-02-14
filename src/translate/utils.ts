@@ -1,4 +1,4 @@
-import { translate } from "#translete";
+import { translate } from "#translate";
 import { Locale } from "discord.js";
 
 export function getLocalizations(

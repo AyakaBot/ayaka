@@ -2,7 +2,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteracti
 import { getRandomEmojis } from "./emojis.js";
 import { colors, getIcon } from "#settings";
 import { getUserLocale } from "#database";
-import { translate } from "#translete";
+import { translate } from "#translate";
 
 export async function executeSolo(interaction: ChatInputCommandInteraction<"cached">) {
     const { user, locale } = interaction;

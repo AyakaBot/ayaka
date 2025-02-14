@@ -2,7 +2,7 @@ import { colors } from "#settings";
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import { fetchSkinRender, RenderTypes, RenderCrops } from "starlightskinapi";
 import { createPagination } from "../pagination.js";
-import { translate } from "#translete";
+import { translate } from "#translate";
 import { getUserLocale } from "#database";
 
 interface RenderOptions {
@@ -98,7 +98,7 @@ export async function execute(
     await interaction.followUp({ embeds: [pages[0]] });
 
     createPagination(initialResponse, {
-        user: interaction.user,
+        user,
         pages,
         initialPage: 1,
         timeout: 60_000

@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, User, EmbedBuilder } from "discord.js";
 import { GameConfig, GameState } from "./types.js";
 import { colors } from "#settings";
-import { translate } from "#translete";
+import { translate } from "#translate";
 
 export const createGrid = (config: GameConfig, state: GameState): ActionRowBuilder<ButtonBuilder>[] => {
     const { gridSize, cards } = config;

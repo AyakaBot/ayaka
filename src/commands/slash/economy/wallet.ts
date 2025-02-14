@@ -1,7 +1,7 @@
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, InteractionContextType, User } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 import { getOrCreateUser, getUserLocale, getUserRankingPosition } from "#database";
-import { getLocalizations, translate } from "#translete";
+import { getLocalizations, translate } from "#translate";
 
 @Discord()
 export class Wallet {

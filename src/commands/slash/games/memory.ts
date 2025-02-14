@@ -1,4 +1,4 @@
-import { getLocalizations } from "#translete";
+import { getLocalizations } from "#translate";
 import { executeCooperative } from "../../functions/memory/cooperative/index.js";
 import { executeSolo } from "../../functions/memory/solo.js";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, InteractionContextType, User } from "discord.js";

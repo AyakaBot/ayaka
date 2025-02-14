@@ -6,7 +6,7 @@ import {
 } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 import { processTransfer } from "../../functions/pay/pay.js";
-import { getLocalizations, translate } from "#translete";
+import { getLocalizations, translate } from "#translate";
 import { getUserLocale } from "#database";
 
 @Discord()

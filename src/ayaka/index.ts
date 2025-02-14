@@ -4,7 +4,7 @@ import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
 import "#database";
 import "#settings";
-import "#translete";
+import "#translate";
 
 export const bot = new Client({
     intents: [

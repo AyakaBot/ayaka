@@ -1,6 +1,6 @@
 import { getUserLocale } from "#database";
 import { colors } from "#settings";
-import { translate } from "#translete";
+import { translate } from "#translate";
 import { EmbedBuilder, Events, Locale, User } from "discord.js";
 import { ArgsOf, Client, Discord, On } from "discordx";
 

@@ -8,7 +8,7 @@ import {
 } from "discord.js";
 import { getOrCreateUser, getUserLocale, updateUserPamonhas } from "#database";
 import { colors, getIcon, icon } from "#settings";
-import { translate } from "#translete";
+import { translate } from "#translate";
 import { GameState, GridCell, GameStatus } from "./types.js";
 
 class MinesweeperGame {
