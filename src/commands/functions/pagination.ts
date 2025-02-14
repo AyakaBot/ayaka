@@ -13,7 +13,7 @@ export enum PaginationButtonIds {
     Previous = "previous",
     Next = "next",
     Close = "close",
-    Home = "home" 
+    Home = "home"
 }
 
 export interface PaginationOptions {
@@ -38,7 +38,7 @@ export async function createPagination(message: InteractionCallbackResponse, opt
                 .setCustomId(PaginationButtonIds.Home)
                 .setEmoji(icon.home)
                 .setStyle(ButtonStyle.Secondary)
-                .setDisabled(currentPage === 1), 
+                .setDisabled(currentPage === 1),
             new ButtonBuilder()
                 .setCustomId(PaginationButtonIds.Next)
                 .setEmoji(icon.arrowRight)
@@ -51,42 +51,60 @@ export async function createPagination(message: InteractionCallbackResponse, opt
         );
     };
 
-    const response = await message.resource?.message?.edit({
-        embeds: [pages[currentPage - 1]],
-        components: [createNavigationButtons()],
-    });
+    const updateMessage = async () => {
+        await message.resource?.message?.edit({
+            embeds: [pages[currentPage - 1]],
+            components: [createNavigationButtons()],
+        });
+    };
 
-    const collector = response?.createMessageComponentCollector({
+    await updateMessage();
+
+    const collector = message.resource?.message?.createMessageComponentCollector({
         componentType: ComponentType.Button,
         time: timeout,
     });
 
     collector?.on("collect", async (i) => {
-        if (i.user.id !== user.id) return; 
+        if (i.user.id !== user.id) return;
 
+        let pageChanged = false;
         switch (i.customId) {
             case PaginationButtonIds.Previous:
-                currentPage--;
+                if (currentPage > 1) {
+                    currentPage--;
+                    pageChanged = true;
+                }
                 break;
             case PaginationButtonIds.Home:
-                currentPage = 1;
+                if (currentPage !== 1) {
+                    currentPage = 1;
+                    pageChanged = true;
+                }
                 break;
             case PaginationButtonIds.Next:
-                currentPage++; 
+                if (currentPage < pages.length) {
+                    currentPage++;
+                    pageChanged = true;
+                }
                 break;
             case PaginationButtonIds.Close:
                 await i.update({ components: [] });
-                collector.stop(); 
+                collector.stop();
                 return;
         }
 
-        await i.update({
-            embeds: [pages[currentPage - 1]],
-            components: [createNavigationButtons()],
-        });
+        if (pageChanged) {
+            await i.update({
+                embeds: [pages[currentPage - 1]],
+                components: [createNavigationButtons()],
+            });
+        } else {
+            await i.deferUpdate(); 
+        }
     });
 
     collector?.on("end", () => {
-        response?.edit({ components: [] }).catch(() => { });
+        message.resource?.message?.edit({ components: [] }).catch(() => { });
     });
 }
