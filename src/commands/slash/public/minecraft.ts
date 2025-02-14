@@ -19,16 +19,16 @@ export class Minecraft {
     })
     async skin(
         @SlashOption({
-            name: "nick",
+            name: "nickname",
             nameLocalizations: getLocalizations("commands.minecraft.options.nick.name"),
             description: "Player nickname",
             descriptionLocalizations: getLocalizations("commands.minecraft.options.nick.description"),
             type: ApplicationCommandOptionType.String,
             required
         })
-        nick: string,
+        nickname: string,
         interaction: ChatInputCommandInteraction<"cached">
     ) {
-        await execute(interaction, nick);
+        await execute(interaction, nickname);
     }
 }
