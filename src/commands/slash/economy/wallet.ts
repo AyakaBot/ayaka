@@ -6,14 +6,13 @@ import { getLocalizations, translate } from "#translate";
 @Discord()
 export class Wallet {
     @Slash({
-        name: "wallet",
         nameLocalizations: getLocalizations("commands.wallet.name"),
         description: "Shows the user's coin balance.",
         descriptionLocalizations: getLocalizations("commands.wallet.description"),
         contexts: [InteractionContextType.Guild],
         defaultMemberPermissions: ["SendMessages"],
     })
-    async run(
+    async wallet(
         @SlashOption({
             name: "target",
             nameLocalizations: getLocalizations("commands.wallet.options.user.name"),

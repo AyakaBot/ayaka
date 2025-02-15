@@ -37,6 +37,7 @@ const getCommandCategories = (locale: string): CommandCategory[] => [
         commands: [
             { name: translate(locale, "commands.memory.principal_name") + " " + translate(locale, "commands.memory.alone.name"), description: translate(locale, "commands.memory.alone.description") },
             { name: translate(locale, "commands.memory.principal_name") + " " + translate(locale, "commands.memory.cooperative.name"), description: translate(locale, "commands.memory.cooperative.description") },
+            { name: translate(locale, "commands.memory.principal_name") + " " + translate(locale, "commands.memory.versus.name"), description: translate(locale, "commands.memory.versus.description") },
             { name: translate(locale, "commands.miner.name"), description: translate(locale, "commands.miner.description") },
         ],
     },

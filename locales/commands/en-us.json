@@ -26,14 +26,32 @@
         },
         "memory": {
             "principal_name": "memory",
-            "principal_escription": "Play the memory game",
+            "principal_description": "Play the memory game",
             "alone": {
                 "name": "alone",
                 "description": "Play alone."
             },
             "cooperative": {
                 "name": "cooperative",
-                "description": "play with a friend"
+                "description": "Play with a friend",
+                "options": {
+                    "name": "friend",
+                    "description": "Select a friend to play together!"
+                }
+            },
+            "versus": {
+                "name": "versus",
+                "description": "Play against someone!",
+                "options": {
+                    "opponent": {
+                        "name": "opponent",
+                        "description": "Select someone to play against."
+                    },
+                    "bet": {
+                        "name": "bet",
+                        "description": "Bet amount."
+                    }
+                }
             }
         },
         "miner": {

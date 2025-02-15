@@ -98,21 +98,26 @@
     "alone": {
       "embed": {
         "description_init_game": "Encontre todos os pares de emojis!",
-        "description_finish_game": "Parabéns! Você completou o jogo em {attempts} tentativas."
-      },
-      "timeout": "{clock} Tempo esgotado! O jogo foi encerrado."
+        "description_finish_game": "💯 Parabéns! Você completou o jogo em {attempts} tentativas."
+      }
     },
     "cooperative": {
       "embed": {
-        "description_init_game": "**Vez de:** {currentPlayer}\n**Pontuação:**\n{author}: {authorScore} pontos\n{friend}: {friendScore} pontos\n",
-        "description_finish_game": "Parabéns! {user} e {friend} completaram o jogo em {attempts} tentativas.\n**Pontuação final:**\n{author}: {authorScore} pontos\n{friendFinal}: {friendScore} pontos",
-        "description_timeout": "Tempo esgotado! O jogo foi encerrado.\n**Pontuação final:**\n{author}: {authorScore} pontos\n{friend}: {friendScore} pontos",
-        "description_turn": "{currentPlayer} acertou um par e ganhou mais uma chance!\n**Pontuação:**\n{author}: {authorScore} pontos\n{friend}: {friendScore} pontos"
-      },
-      "errors": {
-        "self_play": "Você não pode jogar contra si mesmo!",
-        "bot": "Você não pode jogar contra um bot!"
+        "description_init_game": "## Jogo da Memória Cooperativo!\n\n{crownEmoji} Jogador atual: {currentPlayer}\n{authorEmoji} {author}: {authorScore} pontos\n{friendEmoji} {friend}: {friendScore} pontos",
+        "description_finish_game": "## Fim do jogo!\n\n{authorEmoji} {author}: {authorScore} pontos\n{friendEmoji} {friend}: {friendScore} pontos\n💯 Total de tentativas: {attempts}"
       }
+    },
+    "versus": {
+      "embed": {
+        "description_init_game": "## Jogo da Memória Versus!\n\n{crownEmoji} Jogador atual: {currentPlayer}\n{authorEmoji} {author}: {authorScore} pontos\n{opponentEmoji} {opponent}: {opponentScore} pontos\n{betEmoji} Aposta: {bet} pamonhas",
+        "description_finish_game": "## Fim do jogo!\n\n{crownEmoji} Vencedor: {winner}\n{authorEmoji} {author}: {authorScore} pontos\n{opponentEmoji} {opponent}: {opponentScore} pontos\n{betEmoji} Aposta: {bet} pamonhas"
+      }
+    },
+    "errors": {
+      "timeout": "{clock} Tempo esgotado! O jogo foi encerrado.",
+      "self_play": "Você não pode jogar cooperativo sozinho!",
+      "bot": "Você não pode jogar cooperativo com um bot!",
+      "insufficient_funds": "Um ou ambos os jogadores não têm saldo suficiente para a aposta."
     }
   },
   "miner": {
@@ -124,7 +129,8 @@
     },
     "errors": {
       "insufficient": "Você não tem pamonhas suficientes para fazer essa aposta.",
-      "timeout": "{clock} **Tempo esgotado! O jogo foi encerrado.**"
+      "timeout": "{clock} **Tempo esgotado! O jogo foi encerrado.**",
+      "invalid_bet": "A aposta deve ser maior que 100!"
     },
     "bomb_collision": "💣 **Bomba encontrada!** Você perdeu sua aposta.",
     "collect_pamonhas": "🎉 **Você coletou {pamonhas} pamonhas!**",

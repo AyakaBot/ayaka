@@ -55,7 +55,25 @@
             },
             "cooperative": {
                 "name": "cooperativo",
-                "description": "jogar com um amigo"
+                "description": "jogar com um amigo",
+                "options": {
+                    "name": "amigo",
+                    "description": "Selecione um amigo para jogarem juntos!"
+                }
+            },
+            "versus": {
+                "name": "contra",
+                "description": "Jogue contra alguém!",
+                "options": {
+                    "opponent": {
+                        "name": "oponente",
+                        "description": "Selecione alguém para jogarem contra."
+                    },
+                    "bet": {
+                        "name": "bet",
+                        "description": "Valor da aposta."
+                    }
+                }
             }
         },
         "miner": {

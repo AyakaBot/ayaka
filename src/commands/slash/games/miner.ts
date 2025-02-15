@@ -7,14 +7,13 @@ import { Discord, Slash, SlashOption } from "discordx";
 @Discord()
 export class Miner {
     @Slash({
-        name: "miner",
         nameLocalizations: getLocalizations("commands.miner.name"),
         description: "The miner game.",
         descriptionLocalizations: getLocalizations("commands.miner.description"),
         contexts: [InteractionContextType.Guild],
         defaultMemberPermissions: ["SendMessages"]
     })
-    async run(
+    async miner(
         @SlashOption({
             name: "bet",
             nameLocalizations: getLocalizations("commands.miner.options.name"),

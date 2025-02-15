@@ -12,14 +12,13 @@ import { getUserLocale } from "#database";
 @Discord()
 export class Pay {
     @Slash({
-        name: "pay",
         nameLocalizations: getLocalizations("commands.pay.name"),
         description: "Send pamonhas to another user",
         descriptionLocalizations: getLocalizations("commands.pay.description"),
         contexts: [InteractionContextType.Guild],
         defaultMemberPermissions: ["SendMessages"]
     })
-    async run(
+    async pay(
         @SlashOption({
             name: "target",
             nameLocalizations: getLocalizations("commands.pay.options.user.name"),

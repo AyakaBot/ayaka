@@ -8,7 +8,6 @@ const localeMap: Record<string, string> = {
     "en-us": "English",
     "pt-br": "Portuguese",
     "es-es": "Spanish",
-    "ru": "Russian",
 };
 
 @Discord()

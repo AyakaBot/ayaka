@@ -7,14 +7,13 @@ import { Discord, Slash, SlashChoice, SlashOption } from "discordx";
 @Discord()
 export class SetLanguage {
     @Slash({
-        name: "setlanguage",
         nameLocalizations: getLocalizations("commands.language.name"),
         description: "Set the language of the bot",
         descriptionLocalizations: getLocalizations("commands.language.description"),
         contexts: [InteractionContextType.Guild],
         defaultMemberPermissions: ["SendMessages"]
     })
-    async run(
+    async setlanguage(
         @SlashChoice({ name: "English", value: "en-us" })
         @SlashChoice({ name: "Portuguese", value: "pt-br" })
         @SlashChoice({ name: "Spanish", value: "es-es" })

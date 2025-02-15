@@ -8,14 +8,13 @@ import { getLocalizations, translate } from "#translate";
 @Discord()
 export class Rewards {
     @Slash({
-        name: "rewards",
         nameLocalizations: getLocalizations("commands.rewards.name"),
         description: "Claim your rewards",
         descriptionLocalizations: getLocalizations("commands.rewards.description"),
         defaultMemberPermissions: ["SendMessages"],
         contexts: [InteractionContextType.Guild],
     })
-    async run(interaction: ChatInputCommandInteraction<"cached">) {
+    async rewards(interaction: ChatInputCommandInteraction<"cached">) {
         await interaction.deferReply({ flags });
 
         const user = await getOrCreateUser(interaction.member.id);

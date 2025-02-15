@@ -48,14 +48,32 @@
         },
         "memory": {
             "principal_name": "memoria",
-            "principal_description": "Jugar el juego de la memoria",
+            "principal_description": "Jugar al juego de memoria",
             "alone": {
                 "name": "solo",
                 "description": "Jugar solo."
             },
             "cooperative": {
                 "name": "cooperativo",
-                "description": "jugar con un amigo"
+                "description": "Jugar con un amigo",
+                "options": {
+                    "name": "amigo",
+                    "description": "¡Selecciona un amigo para jugar juntos!"
+                }
+            },
+            "versus": {
+                "name": "versus",
+                "description": "¡Jugar contra alguien!",
+                "options": {
+                    "opponent": {
+                        "name": "oponente",
+                        "description": "Selecciona a alguien para jugar en contra."
+                    },
+                    "bet": {
+                        "name": "apuesta",
+                        "description": "Valor de la apuesta."
+                    }
+                }
             }
         },
         "miner": {

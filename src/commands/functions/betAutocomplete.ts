@@ -18,7 +18,7 @@ export async function betAutocomplete(interaction: AutocompleteInteraction): Pro
         await interaction.respond(filtered);
     } catch (error) {
         console.error("Erro no autocomplete:", error);
-        await interaction.respond([]); 
+        await interaction.respond([]);
     }
 }
 
@@ -44,5 +44,5 @@ function filterChoices(choices: Choice[], focusedValue: string): Choice[] {
 }
 
 function calculatePercentage(total: number, percentage: number): number {
-    return (total * percentage) / 100;
+    return Math.floor((total * percentage) / 100);
 }
