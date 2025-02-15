@@ -18,13 +18,13 @@ interface RenderConfig {
 
 const DEFAULT_RENDER_OPTIONS: RenderOptions = {
     model: { resolution: 256 },
-    camera: { angle: "front" }
+    camera: { angle: "front" },
 };
 
 const RENDER_CONFIGS: Partial<Record<RenderTypes, RenderConfig>> = {
     [RenderTypes.Default]: {
         supportedCrops: [RenderCrops.Full],
-        options: { model: { capeEnabled: true } }
+        options: { model: { capeEnabled: true } },
     },
     [RenderTypes.Mojavatar]: { supportedCrops: [RenderCrops.Full] },
     [RenderTypes.CrissCross]: { supportedCrops: [RenderCrops.Full] },
@@ -32,6 +32,11 @@ const RENDER_CONFIGS: Partial<Record<RenderTypes, RenderConfig>> = {
     [RenderTypes.Relaxing]: { supportedCrops: [RenderCrops.Full] },
     [RenderTypes.Facepalm]: { supportedCrops: [RenderCrops.Full] },
 };
+
+function isValidNickname(nickname: string): boolean {
+    const nicknameRegex = /^[a-zA-Z0-9_]{3,16}$/;
+    return nicknameRegex.test(nickname);
+}
 
 function createEmbed(
     renderUrl: string,
@@ -44,11 +49,14 @@ function createEmbed(
         .setImage(renderUrl)
         .setColor(colors.default)
         .setFooter({
-            text: translate(locale, "minecraft.footer", { nickname, type, crop })
+            text: translate(locale, "minecraft.footer", { nickname, type, crop }),
         });
 }
 
-async function generateRenderPages(nickname: string, locale: string): Promise<EmbedBuilder[]> {
+async function generateRenderPages(
+    nickname: string,
+    locale: string
+): Promise<EmbedBuilder[]> {
     const pages: EmbedBuilder[] = [];
 
     for (const [renderType, config] of Object.entries(RENDER_CONFIGS)) {
@@ -60,7 +68,7 @@ async function generateRenderPages(nickname: string, locale: string): Promise<Em
                 const renderResult = await fetchSkinRender(nickname, {
                     type: type as never,
                     crop,
-                    ...options
+                    ...options,
                 });
 
                 if (renderResult.success) {
@@ -68,7 +76,7 @@ async function generateRenderPages(nickname: string, locale: string): Promise<Em
                     pages.push(embed);
                 }
             } catch (error) {
-                console.error(`Error ${type} (${crop}):`, error);
+                console.error(`Erro ao gerar render (${type} - ${crop}):`, error);
             }
         }
     }
@@ -80,27 +88,39 @@ export async function execute(
     interaction: ChatInputCommandInteraction<"cached">,
     nickname: string
 ): Promise<void> {
-    const initialResponse = await interaction.deferReply({ withResponse });
+    try {
+        const initialResponse = await interaction.deferReply({ withResponse });
 
-    const { locale, user } = interaction;
+        const { locale, user } = interaction;
+        const userLocale = await getUserLocale(user);
+        const currentLocale = userLocale ?? locale;
 
-    const userLocale = await getUserLocale(user);
+        if (!isValidNickname(nickname)) {
+            await interaction.followUp({
+                flags,
+                content: translate(currentLocale, "minecraft.not_found", { nickname }),
+            });
+            return;
+        }
 
-    const currentLocale = userLocale ?? locale;
+        const pages = await generateRenderPages(nickname, currentLocale);
 
-    const pages = await generateRenderPages(nickname, currentLocale);
+        if (pages.length === 0) {
+            await interaction.followUp({
+                flags,
+                content: translate(currentLocale, "minecraft.not_found", { nickname }),
+            });
+            return;
+        }
 
-    if (pages.length === 0) {
-        await interaction.followUp({ content: translate(currentLocale, "minecraft.not_found", { nickname }) });
-        return;
+        await interaction.followUp({ embeds: [pages[0]] });
+
+        createPagination(initialResponse, {
+            user,
+            pages,
+            timeout: 60_000,
+        });
+    } catch (error) {
+        console.error("error:", error);
     }
-
-    await interaction.followUp({ embeds: [pages[0]] });
-
-    createPagination(initialResponse, {
-        user,
-        pages,
-        initialPage: 1,
-        timeout: 60_000
-    });
 }
