@@ -100,3 +100,29 @@ export async function updateUserCooldown(userId: string, type: "Daily" | "Weekly
         }
     });
 }
+
+export async function getTermoRanking() {
+    const allUsers = await db.users.all();
+
+    const sortedUsers = allUsers
+        .filter(user => {
+            const termoStats = user.data.games?.termo;
+            return (
+                (termoStats?.victories ?? 0) > 0 ||
+                (termoStats?.totalGuesses ?? 0) > 0 ||
+                (termoStats?.averageGuesses ?? 0) > 0
+            );
+        })
+        .sort((a, b) => (b.data.games?.termo?.victories ?? 0) - (a.data.games?.termo?.victories ?? 0)); 
+
+    return sortedUsers.map((user, index) => {
+        const termoStats = user.data.games?.termo;
+        return {
+            position: index + 1, 
+            userId: user.ref.id, 
+            victories: termoStats?.victories ?? 0, 
+            totalGuesses: termoStats?.totalGuesses ?? 0,
+            averageGuesses: termoStats?.averageGuesses ?? 0, 
+        };
+    });
+}

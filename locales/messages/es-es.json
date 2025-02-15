@@ -139,5 +139,10 @@
     "minecraft": {
         "footer": "Skin de {nickname} | Tipo: {type} | Corte: {crop}",
         "not_found": "No se pudo obtener la skin de **{nickname}**"
+    },
+    "termo": {
+        "errors": {
+            "not_available": "😥 Este comando está disponible solo en portugués."
+        }
     }
 }

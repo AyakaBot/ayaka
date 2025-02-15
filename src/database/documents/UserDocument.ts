@@ -13,5 +13,12 @@ export interface UserDocument {
     },
     options?: {
         language?: Languages
+    },
+    games?: {
+        termo?: {
+            victories: number,
+            totalGuesses: number, 
+            averageGuesses: number,
+        }
     }
 }

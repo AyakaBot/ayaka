@@ -71,6 +71,25 @@
                     "description": "Nickname of a player"
                 }
             }
+        },
+        "termo": {
+            "rank": {
+                "description": "See the player rankings"
+            },
+            "play": {
+                "description": "Play the game 'Termo' and try to guess the word!",
+                "options": {
+                    "theme": {
+                        "description": "Choose the theme for the words in the game",
+                        "choices": {
+                            "general": "General",
+                            "country": "Country",
+                            "food": "Food",
+                            "soccer": "Soccer"
+                        }
+                    }
+                }
+            }
         }
     }
 }

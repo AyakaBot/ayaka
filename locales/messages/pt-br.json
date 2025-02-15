@@ -139,5 +139,7 @@
   "minecraft": {
     "footer": "Skin de {nickname} | Tipo: {type} | Corte: {crop}",
     "not_found": "Não foi possível obter a skin de **{nickname}**"
+  },
+  "termo": {
   }
 }
