@@ -94,6 +94,7 @@ export class MemoryGame {
     private async handleInteraction(i: ButtonInteraction): Promise<void> {
         if (this.gameMode !== GameMode.Solo && i.user.id !== this.user.id && i.user.id !== this.opponent?.id) return;
         if (this.gameMode !== GameMode.Solo && i.user.id !== this.gameState.currentPlayer.id) return;
+        if (this.gameMode === GameMode.Solo && i.user.id !== this.user.id) return;
 
         await i.deferUpdate();
 
