@@ -31,7 +31,7 @@ export class TermoGame {
         this.wordToGuess = this.getRandomWord().toUpperCase();
         this.wordLength = this.wordToGuess.length;
         this.chancesLeft = this.maxChances;
-        this.guessedWords = Array(this.maxChances).fill("?".repeat(this.wordLength));
+        this.guessedWords = Array(this.maxChances).fill(charInvisible.repeat(this.wordLength));
         this.currentGuessIndex = 0;
     }
 
@@ -84,10 +84,10 @@ export class TermoGame {
             const buttons: ButtonBuilder[] = [];
 
             for (let col = 0; col < this.wordLength; col++) {
-                const char = this.guessedWords[row][col] || "?";
+                const char = this.guessedWords[row][col] || charInvisible;
                 let style = ButtonStyle.Secondary;
 
-                if (this.guessedWords[row] !== "?".repeat(this.wordLength)) {
+                if (this.guessedWords[row] !== charInvisible.repeat(this.wordLength)) {
                     if (char === this.wordToGuess[col]) {
                         style = ButtonStyle.Success;
                     } else if (this.wordToGuess.includes(char)) {

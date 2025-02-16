@@ -112,6 +112,10 @@
                     }
                 }
             }
+        },
+        "race": {
+            "name": "carrera",
+            "description": "¡Inicia una carrera entre animales!"
         }
     }
 }

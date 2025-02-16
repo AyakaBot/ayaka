@@ -140,6 +140,25 @@
     "footer": "Skin de {nickname} | Tipo: {type} | Corte: {crop}",
     "not_found": "Não foi possível obter a skin de **{nickname}**"
   },
-  "termo": {
+  "termo": {},
+  "race": {
+    "errors": {
+      "timeout": "{clock} Tempo esgotado! A corrida não foi iniciada.",
+      "game_started": "Uma corrida já está em andamento neste servidor!"
+    },
+    "buttons": {
+      "start": "Iniciar"
+    },
+    "initial_embed": {
+      "title": "🏁 Corrida de Animais",
+      "description": "Escolha um animal para participar da corrida!"
+    },
+    "second_embed": {
+      "title": "🏁 Corrida em Andamento",
+      "description": "A corrida começou! Veja o progresso abaixo:"
+    },
+    "field_name": "Jogadores",
+    "field_value": "Nenhum jogador ainda",
+    "win": "🏆 <@{userId}> venceu a corrida com {animal}!"
   }
 }

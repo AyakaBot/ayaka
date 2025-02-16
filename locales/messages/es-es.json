@@ -144,5 +144,25 @@
         "errors": {
             "not_available": "😥 Este comando está disponible solo en portugués."
         }
+    },
+    "race": {
+        "errors": {
+            "timeout": "{clock} ¡Tiempo agotado! La carrera no se inició.",
+            "game_started": "¡Una carrera ya está en progreso en este servidor!"
+        },
+        "buttons": {
+            "start": "Iniciar"
+        },
+        "initial_embed": {
+            "title": "🏁 Carrera de Animales",
+            "description": "¡Elige un animal para unirte a la carrera!"
+        },
+        "second_embed": {
+            "title": "🏁 Carrera en Progreso",
+            "description": "¡La carrera ha comenzado! Mira el progreso a continuación:"
+        },
+        "field_name": "Jugadores",
+        "field_value": "Aún no hay jugadores",
+        "win": "🏆 <@{userId}> ganó la carrera con {animal}!"
     }
 }

@@ -144,5 +144,25 @@
         "errors": {
             "not_available": "😥 This command is only available in Portuguese."
         }
+    },
+    "race": {
+        "errors": {
+            "timeout": "{clock} Time's up! The race wasn't started.",
+            "game_started": "A race is already in progress on this server!"
+        },
+        "buttons": {
+            "start": "Start"
+        },
+        "initial_embed": {
+            "title": "🏁 Animal Race",
+            "description": "Choose an animal to join the race!"
+        },
+        "second_embed": {
+            "title": "🏁 Race in Progress",
+            "description": "The race has started! See the progress below:"
+        },
+        "field_name": "Players",
+        "field_value": "No players yet",
+        "win": "🏆 <@{userId}> won the race with {animal}!"
     }
 }

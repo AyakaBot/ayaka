@@ -90,6 +90,10 @@
                     }
                 }
             }
+        },
+        "race": {
+            "name": "race",
+            "description": "Start a race between animals!"
         }
     }
 }

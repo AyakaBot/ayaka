@@ -20,7 +20,7 @@ export const createGrid = (config: GameConfig, state: GameState): ActionRowBuild
             row.addComponents(
                 new ButtonBuilder()
                     .setCustomId(index.toString())
-                    .setLabel(isRevealed || isMatched ? cards[index] : "❓")
+                    .setLabel(isRevealed || isMatched ? cards[index] : charInvisible)
                     .setStyle(isMatched ? ButtonStyle.Success : ButtonStyle.Secondary)
                     .setDisabled(isMatched)
             );

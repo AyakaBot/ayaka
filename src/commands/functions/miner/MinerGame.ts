@@ -9,7 +9,7 @@ import {
 import { getOrCreateUser, getUserLocale, updateUserPamonhas } from "#database";
 import { colors, getIcon, icon } from "#settings";
 import { translate } from "#translate";
-import { GameState, GridCell, GameStatus } from "./types.js";
+import { GameState, GridCell, GameStatus } from "./models.js";
 
 export class MinesweeperGame {
     private readonly gridSize: number = 4;

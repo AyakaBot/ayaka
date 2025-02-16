@@ -112,6 +112,11 @@
                     }
                 }
             }
+        },
+
+        "race": {
+            "name": "corrida",
+            "description": "Inicie uma corrida entre animais!"
         }
     }
 }

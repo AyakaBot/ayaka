@@ -7,6 +7,7 @@ declare global {
 	const required: true;
 	const inline: true;
 	const disabled: true;
+	const charInvisible: string
 }
 
 Object.assign(globalThis, Object.freeze({
@@ -16,4 +17,5 @@ Object.assign(globalThis, Object.freeze({
 	required: true,
 	inline: true,
 	disabled: true,
+	charInvisible: "ㅤ"
 }));
