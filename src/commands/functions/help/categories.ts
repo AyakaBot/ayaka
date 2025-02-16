@@ -37,6 +37,7 @@ export const getCommandCategories = (locale: string): CommandCategory[] => [
             { name: "termo rank", description: translate(locale, "commands.termo.rank.description") },
             { name: "termo play", description: translate(locale, "commands.termo.play.description") },
             { name: translate(locale, "commands.miner.name"), description: translate(locale, "commands.miner.description") },
+            { name: translate(locale, "commands.race.name"), description: translate(locale, "commands.race.description") },
         ],
     },
 ];
