@@ -2,7 +2,7 @@ import { ChatInputCommandInteraction, User } from "discord.js";
 import { getUserLocale } from "#database";
 import { translate } from "#translate";
 import { MemoryGame } from "../MemoryGame.js";
-import { GameMode } from "../types/memory.js";
+import { GameMode } from "../models.js";
 
 export async function executeCooperative(interaction: ChatInputCommandInteraction<"cached">, friendUser: User) {
     const { user, client, locale } = interaction;

@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, User, EmbedBuilder } from "discord.js";
-import { GameConfig, GameState } from "./types/memory.js";
+import { GameConfig, GameState } from "./models.js";
 import { colors, getIcon } from "#settings";
 import { translate } from "#translate";
 

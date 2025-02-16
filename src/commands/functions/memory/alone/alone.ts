@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction } from "discord.js";
 import { MemoryGame } from "../MemoryGame.js";
 import { getUserLocale } from "#database";
-import { GameMode } from "../types/memory.js";
+import { GameMode } from "../models.js";
 
 export async function executeAlone(interaction: ChatInputCommandInteraction<"cached">) {
     const { user, locale } = interaction;

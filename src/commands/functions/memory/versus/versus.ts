@@ -2,7 +2,7 @@ import { ChatInputCommandInteraction, User } from "discord.js";
 import { MemoryGame } from "../MemoryGame.js";
 import { translate } from "#translate";
 import { getOrCreateUser, getUserLocale } from "#database";
-import { GameMode } from "../types/memory.js";
+import { GameMode } from "../models.js";
 
 export async function executeVersus(interaction: ChatInputCommandInteraction<"cached">, opponentUser: User, bet?: number) {
     const { user, locale } = interaction;

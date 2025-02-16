@@ -6,7 +6,7 @@ import {
     InteractionCallbackResponse,
     ChatInputCommandInteraction
 } from "discord.js";
-import { GameConfig, GameState, GameMode } from "./types/memory.js";
+import { GameConfig, GameState, GameMode } from "./models.js";
 import { createGrid, isGameOver, createEmbed } from "./utils.js";
 import { translate } from "#translate";
 import { getRandomEmojis } from "./emojis.js";
