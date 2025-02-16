@@ -13,7 +13,7 @@ import { GameState, GridCell, GameStatus } from "./models.js";
 
 export class MinesweeperGame {
     private readonly gridSize: number = 4;
-    private readonly bombProbability: number = 0.2; // 20%
+    private readonly bombProbability: number = 0.20; // 20%
     private readonly initialMultiplier: number = 1;
     private readonly multiplierIncrement: number = 0.3;
 
@@ -38,9 +38,12 @@ export class MinesweeperGame {
             grid,
             revealed,
             multiplier: this.initialMultiplier,
-            status: GameStatus.Ongoing
+            status: GameStatus.Ongoing,
+            clickCount: 0,
+            currentBombProbability: this.bombProbability,
         };
     }
+
 
     private formatNumber(value: number): string {
         return Math.round(value).toString();
@@ -52,7 +55,7 @@ export class MinesweeperGame {
                 row.map((isRevealed, j) =>
                     new ButtonBuilder()
                         .setCustomId(`${i}-${j}`)
-                        .setLabel(isRevealed ? this.state.grid[i][j] : "❓")
+                        .setLabel(isRevealed ? this.state.grid[i][j] : charInvisible)
                         .setStyle(isRevealed ? (this.state.grid[i][j] === GridCell.Diamond ? ButtonStyle.Success : ButtonStyle.Danger) : ButtonStyle.Secondary)
                         .setDisabled(isRevealed || this.state.status !== GameStatus.Ongoing)
                 )
@@ -67,19 +70,32 @@ export class MinesweeperGame {
                 .setLabel(translate(locale, "miner.collect_button"))
                 .setEmoji(icon.dolar)
                 .setStyle(ButtonStyle.Primary)
-                .setDisabled(this.state.status !== GameStatus.Ongoing)
+                .setDisabled(this.state.clickCount < 3 || this.state.status !== GameStatus.Ongoing)
         );
     }
 
     private createEmbed(locale: string): EmbedBuilder {
         return new EmbedBuilder()
             .addFields(
-                { name: translate(locale, "miner.embed.multiplier"), value: `${this.state.multiplier.toFixed(2)}x`, inline: true },
-                { name: translate(locale, "miner.embed.bet"), value: `${this.bet} ${getIcon("dolar")}`, inline: true },
-                { name: translate(locale, "miner.embed.potencial"), value: `${this.formatNumber(this.bet * this.state.multiplier)} ${getIcon("dolar")}`, inline: true }
+                { name: translate(locale, "miner.embed.multiplier"), value: `${this.state.multiplier.toFixed(2)}x`, inline },
+                { name: translate(locale, "miner.embed.bet"), value: `${this.bet}`, inline },
+                { name: translate(locale, "miner.embed.potencial"), value: `${this.formatNumber(this.bet * this.state.multiplier)}`, inline }
             )
             .setFooter({ text: translate(locale, "miner.embed.footer") })
             .setColor(colors.primary);
+    }
+
+    private recalculateGrid(): void {
+        for (let i = 0; i < this.gridSize; i++) {
+            for (let j = 0; j < this.gridSize; j++) {
+                if (!this.state.revealed[i][j]) {
+                    this.state.grid[i][j] =
+                        Math.random() < this.state.currentBombProbability
+                            ? GridCell.Bomb
+                            : GridCell.Diamond;
+                }
+            }
+        }
     }
 
     public async start() {
@@ -125,17 +141,22 @@ export class MinesweeperGame {
                 this.state.status = GameStatus.Collected;
                 collector.stop();
 
-                const winnings = Math.round(this.bet * this.state.multiplier); // Arredonda o valor para o inteiro mais próximo
+                const winnings = Math.round(this.bet * this.state.multiplier);
                 await updateUserPamonhas(this.interaction.user.id, winnings);
 
                 await i.update({
-                    embeds: [embed.setDescription(translate(currentLocale, "miner.collect_pamonhas", { pamonhas: winnings }))],
+                    embeds: [
+                        embed.setDescription(
+                            translate(currentLocale, "miner.collect_pamonhas", { pamonhas: winnings })
+                        ),
+                    ],
                     components: [...this.createGrid(), this.createCollectButton(currentLocale)],
                 });
                 return;
             }
 
             const [row, col] = i.customId.split("-").map(Number);
+
             this.state.revealed[row][col] = true;
 
             if (this.state.grid[row][col] === GridCell.Bomb) {
@@ -145,18 +166,29 @@ export class MinesweeperGame {
                 await updateUserPamonhas(this.interaction.user.id, -this.bet);
 
                 await i.update({
-                    embeds: [embed.setDescription(translate(currentLocale, "miner.bomb_collision"))],
+                    embeds: [
+                        embed.setDescription(translate(currentLocale, "miner.bomb_collision")),
+                    ],
                     components: [...this.createGrid(), this.createCollectButton(currentLocale)],
                 });
             } else {
                 this.state.multiplier += this.multiplierIncrement;
+                this.state.clickCount++;
+
+                this.state.currentBombProbability += 0.05;
+
+                console.log(this.state.currentBombProbability)
+
+                this.recalculateGrid();
 
                 await i.update({
-                    embeds: [embed.setFields(
-                        { name: translate(currentLocale, "miner.embed.multiplier"), value: `${this.state.multiplier.toFixed(2)}x`, inline: true },
-                        { name: translate(currentLocale, "miner.embed.bet"), value: `${this.bet} ${getIcon("dolar")}`, inline: true },
-                        { name: translate(currentLocale, "miner.embed.potencial"), value: `${this.formatNumber(this.bet * this.state.multiplier)} ${getIcon("dolar")}`, inline: true }
-                    )],
+                    embeds: [
+                        embed.setFields(
+                            { name: translate(currentLocale, "miner.embed.multiplier"), value: `${this.state.multiplier.toFixed(2)}x`, inline },
+                            { name: translate(currentLocale, "miner.embed.bet"), value: `${this.bet}`, inline },
+                            { name: translate(currentLocale, "miner.embed.potencial"), value: `${this.formatNumber(this.bet * this.state.multiplier)}`, inline }
+                        ),
+                    ],
                     components: [...this.createGrid(), this.createCollectButton(currentLocale)],
                 });
             }

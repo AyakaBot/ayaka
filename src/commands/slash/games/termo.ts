@@ -13,7 +13,7 @@ interface GameCache {
 const games: Map<string, GameCache> = new Map();
 
 @Discord()
-@SlashGroup({ name: "termo", description: "Jogue o jogo de adivinhação 'Termo'!" })
+@SlashGroup({ name: "termo", description: "Play the game 'Termo' and try to guess the word!" })
 @SlashGroup("termo")
 export class Termo {
     @Slash({
@@ -85,7 +85,7 @@ export class Termo {
 
         const timeout = setTimeout(() => {
             games.delete(user.id);
-        }, 3 * 60 * 1000); 
+        }, 5 * 60 * 1000); 
 
         games.set(user.id, { game, timeout });
 
@@ -100,7 +100,7 @@ export class Termo {
         const { game, timeout } = cachedGame;
 
         clearTimeout(timeout);
-        cachedGame.timeout = setTimeout(() => { games.delete(interaction.user.id); }, 3 * 60 * 1000);
+        cachedGame.timeout = setTimeout(() => { games.delete(interaction.user.id); }, 5 * 60 * 1000);
 
         const modal = game.createGuessModal();
         await interaction.showModal(modal);
@@ -114,7 +114,7 @@ export class Termo {
         const { game, timeout } = cachedGame;
 
         clearTimeout(timeout);
-        cachedGame.timeout = setTimeout(() => { games.delete(interaction.user.id); }, 3 * 60 * 1000);
+        cachedGame.timeout = setTimeout(() => { games.delete(interaction.user.id); }, 5 * 60 * 1000);
 
         await game.processGuess(interaction);
 

@@ -14,4 +14,6 @@ export interface GameState {
     revealed: boolean[][];
     multiplier: number;
     status: GameStatus;
+    clickCount: number;
+    currentBombProbability: number;
 }
