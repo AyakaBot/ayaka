@@ -102,6 +102,7 @@
                 "description": "Jogue o jogo 'Termo' e tente adivinhar a palavra!",
                 "options": {
                     "theme": {
+                        "name": "tema",
                         "description": "Escolha o tema das palavras para o jogo",
                         "choices": {
                             "general": "Geral",

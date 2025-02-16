@@ -80,6 +80,7 @@
                 "description": "Play the game 'Termo' and try to guess the word!",
                 "options": {
                     "theme": {
+                        "name": "theme",
                         "description": "Choose the theme for the words in the game",
                         "choices": {
                             "general": "General",

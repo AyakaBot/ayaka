@@ -12,7 +12,14 @@ import {
 import { wordLists } from "../wordList.js";
 import { db, getOrCreateUser } from "#database";
 
+type GameCache = {
+    timeout: NodeJS.Timeout;
+    game: TermoGame;
+};
+
 export class TermoGame {
+    private static readonly games: Map<string, GameCache> = new Map();
+
     private readonly maxChances = 4;
     private chancesLeft: number;
     private wordToGuess: string;
@@ -33,6 +40,57 @@ export class TermoGame {
         this.chancesLeft = this.maxChances;
         this.guessedWords = Array(this.maxChances).fill(charInvisible.repeat(this.wordLength));
         this.currentGuessIndex = 0;
+    }
+
+    public async start(): Promise<void> {
+        try {
+            const embed = this.createEmbed();
+
+            await this.interaction.reply({
+                embeds: [embed],
+                components: [...this.createGrid(), this.createGuessButton()],
+            });
+        } catch (error) {
+            console.error("Erro:", error);
+            await this.interaction.reply({
+                content: "Ocorreu um erro ao iniciar o jogo.",
+                flags,
+            });
+        }
+    }
+
+    public static startNewGame(interaction: ChatInputCommandInteraction<"cached">, theme: keyof typeof wordLists | "general",): TermoGame {
+        const userId = interaction.user.id;
+
+        this.deleteGame(userId);
+
+        const game = new TermoGame(interaction, theme);
+        const timeout = setTimeout(() => {
+            this.deleteGame(userId);
+        }, 5 * 60 * 1000);
+
+        this.games.set(userId, { game, timeout });
+        return game;
+    }
+
+    public static getGame(userId: string): TermoGame | null {
+        const cache = this.games.get(userId);
+        if (!cache) return null;
+
+        clearTimeout(cache.timeout);
+        cache.timeout = setTimeout(() => {
+            this.deleteGame(userId);
+        }, 5 * 60 * 1000);
+
+        return cache.game;
+    }
+
+    public static deleteGame(userId: string): void {
+        const cache = this.games.get(userId);
+        if (cache) {
+            clearTimeout(cache.timeout);
+            this.games.delete(userId);
+        }
     }
 
     private getRandomWord(): string {
@@ -216,24 +274,7 @@ export class TermoGame {
         } catch (error) {
             console.error("Erro:", error);
             await interaction.editReply({
-                content: "Ocorreu um erro ao processar seu chute",
-            });
-        }
-    }
-
-    public async start() {
-        try {
-            const embed = this.createEmbed();
-
-            await this.interaction.reply({
-                embeds: [embed],
-                components: [...this.createGrid(), this.createGuessButton()],
-            });
-        } catch (error) {
-            console.error("Erro:", error);
-            await this.interaction.reply({
-                flags,
-                content: "Ocorreu um erro ao iniciar o jogo.",
+                content: "Ocorreu um erro ao processar seu chute.",
             });
         }
     }

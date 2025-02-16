@@ -1,16 +1,9 @@
-import { ApplicationCommandOptionType, ButtonInteraction, ChatInputCommandInteraction, ModalSubmitInteraction, } from "discord.js";
+import { ApplicationCommandOptionType, ButtonInteraction, ChatInputCommandInteraction, ModalSubmitInteraction } from "discord.js";
 import { ButtonComponent, Discord, ModalComponent, Slash, SlashChoice, SlashGroup, SlashOption } from "discordx";
 import { TermoGame } from "../../functions/termo/game/TermoGame.js";
 import { getUserLocale } from "#database";
 import { executeRank } from "../../functions/termo/rank/rank.js";
 import { getLocalizations, translate } from "#translate";
-
-interface GameCache {
-    game: TermoGame;
-    timeout: NodeJS.Timeout;
-}
-
-const games: Map<string, GameCache> = new Map();
 
 @Discord()
 @SlashGroup({ name: "termo", description: "Play the game 'Termo' and try to guess the word!" })
@@ -18,7 +11,7 @@ const games: Map<string, GameCache> = new Map();
 export class Termo {
     @Slash({
         description: "See the players' rankings",
-        descriptionLocalizations: getLocalizations("commands.termo.rank.description")
+        descriptionLocalizations: getLocalizations("commands.termo.rank.description"),
     })
     async rank(interaction: ChatInputCommandInteraction<"cached">) {
         const { locale, user } = interaction;
@@ -37,38 +30,39 @@ export class Termo {
 
     @Slash({
         description: "Play the game 'Term' and try to guess the word!",
-        descriptionLocalizations: getLocalizations("commands.termo.play.description")
+        descriptionLocalizations: getLocalizations("commands.termo.play.description"),
     })
     async play(
         @SlashChoice({
-            name: "Geral",
+            name: "General",
             nameLocalizations: getLocalizations("commands.termo.play.options.theme.choices.general"),
-            value: "general"
+            value: "general",
         })
         @SlashChoice({
-            name: "País",
+            name: "Country",
             nameLocalizations: getLocalizations("commands.termo.play.options.theme.choices.country"),
-            value: "country"
+            value: "country",
         })
         @SlashChoice({
-            name: "Comidas",
+            name: "Foods",
             nameLocalizations: getLocalizations("commands.termo.play.options.theme.choices.food"),
-            value: "food"
+            value: "food",
         })
         @SlashChoice({
-            name: "Futebol",
+            name: "Soccer",
             nameLocalizations: getLocalizations("commands.termo.play.options.theme.choices.soccer"),
-            value: "soccer"
+            value: "soccer",
         })
         @SlashOption({
             name: "theme",
+            nameLocalizations: getLocalizations("commands.termo.play.options.theme.name"),
             description: "Choose the theme of the words for the game",
-            descriptionLocalizations: getLocalizations("commands.termo.play.options.tema.description"),
+            descriptionLocalizations: getLocalizations("commands.termo.play.options.theme.description"),
             type: ApplicationCommandOptionType.String,
-            required: true,
+            required,
         })
         theme: "country" | "food" | "soccer" | "general",
-        interaction: ChatInputCommandInteraction<"cached">
+        interaction: ChatInputCommandInteraction<"cached">,
     ) {
         const { locale, user } = interaction;
 
@@ -81,26 +75,16 @@ export class Termo {
             });
         }
 
-        const game = new TermoGame(interaction, theme);
-
-        const timeout = setTimeout(() => {
-            games.delete(user.id);
-        }, 5 * 60 * 1000); 
-
-        games.set(user.id, { game, timeout });
-
+        const game = TermoGame.startNewGame(interaction, theme);
         await game.start();
     }
 
     @ButtonComponent({ id: "guess" })
     async handleGuess(interaction: ButtonInteraction<"cached">) {
-        const cachedGame = games.get(interaction.user.id);
-        if (!cachedGame) return;
+        const { user } = interaction;
 
-        const { game, timeout } = cachedGame;
-
-        clearTimeout(timeout);
-        cachedGame.timeout = setTimeout(() => { games.delete(interaction.user.id); }, 5 * 60 * 1000);
+        const game = TermoGame.getGame(user.id);
+        if (!game) return;
 
         const modal = game.createGuessModal();
         await interaction.showModal(modal);
@@ -108,18 +92,15 @@ export class Termo {
 
     @ModalComponent({ id: "guess-modal" })
     async handleGuessModal(interaction: ModalSubmitInteraction<"cached">) {
-        const cachedGame = games.get(interaction.user.id);
-        if (!cachedGame) return;
+        const { user } = interaction;
 
-        const { game, timeout } = cachedGame;
-
-        clearTimeout(timeout);
-        cachedGame.timeout = setTimeout(() => { games.delete(interaction.user.id); }, 5 * 60 * 1000);
+        const game = TermoGame.getGame(user.id);
+        if (!game) return;
 
         await game.processGuess(interaction);
 
         if (game["chancesLeft"] === 0 || game["guessedWords"].includes(game["wordToGuess"])) {
-            games.delete(interaction.user.id);
+            TermoGame.deleteGame(user.id);
         }
     }
 }
