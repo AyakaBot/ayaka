@@ -26,6 +26,10 @@ export function handleInteractions(locale: string, interaction: ChatInputCommand
 
     collector?.on("end", async () => {
         if (serverState.raceStatus === RaceStatus.NotStarted) {
+            serverState.players = [];
+            serverState.raceStatus = RaceStatus.NotStarted;
+            serverState.messageId = undefined;
+
             await message.resource?.message?.edit({
                 content: translate(locale, "race.errors.timeout", { clock: getIcon("clock") }),
                 embeds: [],

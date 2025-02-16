@@ -91,6 +91,7 @@ async function endRace(locale: string, interaction: ButtonInteraction, raceTrack
     });
 
     serverState.players = [];
+    serverState.messageId = undefined;
     serverState.raceStatus = RaceStatus.NotStarted;
 }
 

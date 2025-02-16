@@ -13,6 +13,7 @@ export enum RaceStatus {
 export interface ServerState {
     players: Player[];
     raceStatus: RaceStatus;
+    messageId?: string;
 }
 
 export const serverStates: Record<string, ServerState> = {};

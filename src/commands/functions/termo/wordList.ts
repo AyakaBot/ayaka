@@ -4,19 +4,19 @@ export const wordLists = {
         "SUICA", "CUBA", "OMAN", "QATAR", "ARUBA", "BAREM", "BENIM",
         "BUTAO", "CATAR", "GABAO", "GUINE", "HAITI",
         "IEMEN", "LIBIA", "MACAU", "MALTA", "NEPAL", "NIGER",
-        "PALAU", "SAMOA", "SIRIA", "SUDAO", "TONGA"
+        "PALAU", "SAMOA", "SIRIA", "SUDÃO", "TONGA"
     ],
     food: [
-        "ARROZ", "FEIJAO", "PIZZA", "PASTA", "SUSHI", "CARNE", "PEIXE",
-        "LEITE", "FRUTA", "CHIPS", "CACAU", "CAFES", "BISCO",
+        "ARROZ", "FEIJÃO", "PIZZA", "PASTA", "SUSHI", "CARNE", "PEIXE",
+        "LEITE", "FRUTA", "CHIPS", "CACAU", "CAFÉS", "BISCO",
         "MOLHO", "UVAS", "DOCES", "TORTA", "TACOS", "VINHO",
         "LIMAO", "CURRY", "AIPIM", "AMORA", "ARACA", "AVEIA", "AVELA",
         "BACON", "CAQUI", "CHOPP", "CIDRA", "COUVE",
         "CRAVO", "CREPE", "CURAU", "GLACE", "JAMBO", "LICOR",
-        "LOMBO", "MAMAO", "MANGA", "MENTA", "MILHO",
+        "LOMBO", "MAMÃO", "MANGA", "MENTA", "MILHO",
         "NOZES", "PEQUI", "PINHA", "PUDIM", "QUIBE",
         "SALSA", "SAQUE", "SONHO", "SUFLE", "TRIGO", "TRUFA",
-        "VODCA"
+        "VODCA", "FANTA"
     ],
     soccer: [
         "BOLA", "TIME", "REDE", "CHUTE", "FALTA", "JOGAR", "CAMPO",

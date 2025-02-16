@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, } from "discord.js";
+import { ChatInputCommandInteraction } from "discord.js";
 import { RaceStatus, serverStates } from "./models.js";
 import { createAnimalButtons, createStartButton, createRaceEmbed } from "./utils.js";
 import { handleInteractions } from "./interactions.js";
@@ -10,6 +10,11 @@ export async function execute(interaction: ChatInputCommandInteraction<"cached">
 
     const currentLocale = (await getUserLocale(user)) ?? locale;
 
+    if (serverStates[guildId] && serverStates[guildId].messageId) {
+        await interaction.reply({ flags, content: translate(currentLocale, "race.errors.game_started") });
+        return;
+    }
+
     if (!serverStates[guildId]) {
         serverStates[guildId] = {
             players: [],
@@ -18,11 +23,6 @@ export async function execute(interaction: ChatInputCommandInteraction<"cached">
     }
 
     const serverState = serverStates[guildId];
-
-    if (serverState.raceStatus === RaceStatus.InProgress) {
-        await interaction.reply({ flags, content: translate(currentLocale, "race.errors.game_started") });
-        return;
-    }
 
     const animalRows = createAnimalButtons(serverState.players);
     const startRow = createStartButton(currentLocale, serverState.players);
@@ -33,6 +33,8 @@ export async function execute(interaction: ChatInputCommandInteraction<"cached">
         embeds: [embed],
         components: [...animalRows, startRow],
     });
+
+    serverState.messageId = message.resource?.message?.id;
 
     handleInteractions(currentLocale, interaction, message, guildId);
 }

@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, ChatInputCommandInteraction, InteractionContextType, User } from "discord.js";
+import { ApplicationCommandOptionType, ChatInputCommandInteraction, GuildMember, InteractionContextType, User } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 import { getOrCreateUser, getUserLocale, getUserRankingPosition } from "#database";
 import { getLocalizations, translate } from "#translate";
@@ -20,7 +20,7 @@ export class Wallet {
             descriptionLocalizations: getLocalizations("commands.wallet.options.user.description"),
             type: ApplicationCommandOptionType.User,
         })
-        target: User | undefined, 
+        target: GuildMember | undefined, 
         interaction: ChatInputCommandInteraction<"cached">
     ) {
         const { locale } = interaction;
