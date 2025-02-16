@@ -75,8 +75,11 @@
     }
   },
   "set_language": {
-    "embed": {
-      "description": "Meu idioma foi setado para Português."
+    "initial_embed": {
+      "description": "{translateEmoji} Seleciona alguma das linguagens abaixo"
+    },
+    "final_embed": {
+      "description": "{emoji} Meu idioma foi setado para Português."
     }
   },
   "help": {

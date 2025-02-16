@@ -75,8 +75,11 @@
         }
     },
     "set_language": {
-        "embed": {
-            "description": "El idioma ha sido configurado a Espanhol."
+        "initial_embed": {
+            "description": "{translateEmoji} Selecciona uno de los idiomas a continuación"
+        },
+        "final_embed": {
+            "description": "{emoji} Mi idioma ha sido configurado a Español."
         }
     },
     "help": {

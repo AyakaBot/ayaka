@@ -34,13 +34,7 @@
         },
         "language": {
             "description": "Configura el idioma del bot.",
-            "name": "configuraridioma",
-            "options": {
-                "language": {
-                    "description": "El idioma para configurar.",
-                    "name": "idioma"
-                }
-            }
+            "name": "configuraridioma"
         },
         "help": {
             "name": "ayuda",

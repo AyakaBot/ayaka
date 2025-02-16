@@ -1,8 +1,7 @@
-import { Languages } from "#database";
 import { getLocalizations } from "#translate";
 import { execute } from "../../functions/setLanguage/setLanguage.js";
-import { ApplicationCommandOptionType, ChatInputCommandInteraction, InteractionContextType } from "discord.js";
-import { Discord, Slash, SlashChoice, SlashOption } from "discordx";
+import { ChatInputCommandInteraction, InteractionContextType } from "discord.js";
+import { Discord, Slash } from "discordx";
 
 @Discord()
 export class SetLanguage {
@@ -14,19 +13,7 @@ export class SetLanguage {
         defaultMemberPermissions: ["SendMessages"]
     })
     async setlanguage(
-        @SlashChoice({ name: "English", value: "en-us" })
-        @SlashChoice({ name: "Portuguese", value: "pt-br" })
-        @SlashChoice({ name: "Spanish", value: "es-es" })
-        @SlashOption({
-            name: "language",
-            nameLocalizations: getLocalizations("commands.language.options.language.name"),
-            description: "Language",
-            descriptionLocalizations: getLocalizations("commands.language.options.language.description"),
-            type: ApplicationCommandOptionType.String,
-            required
-        })
-        language: Languages,
         interaction: ChatInputCommandInteraction<"cached">) {
-        await execute(interaction, language);
+        await execute(interaction);
     }
 }

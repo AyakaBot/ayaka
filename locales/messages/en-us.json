@@ -75,8 +75,11 @@
         }
     },
     "set_language": {
-        "embed": {
-            "description": "The language has been set to English."
+        "initial_embed": {
+            "description": "{translateEmoji} Select one of the languages below"
+        },
+        "final_embed": {
+            "description": "{emoji} My language has been set to English."
         }
     },
     "help": {

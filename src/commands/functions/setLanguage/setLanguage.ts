@@ -1,22 +1,48 @@
-import { db, getUserLocale, Languages } from "#database";
-import { colors } from "#settings";
+import { colors, getIcon } from "#settings";
+import { ActionRowBuilder, ChatInputCommandInteraction, EmbedBuilder, StringSelectMenuBuilder } from "discord.js";
+import { selectLanguageMenu } from "./menu.js";
 import { translate } from "#translate";
-import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
+import { getUserLocale } from "#database";
 
-export async function execute(interaction: ChatInputCommandInteraction<"cached">, language: Languages | undefined) {
-    await interaction.deferReply({ flags });
+export async function execute(interaction: ChatInputCommandInteraction<"cached">) {
+    const message = await interaction.deferReply({ withResponse, flags });
 
-    const { locale, user } = interaction;
+    const { user, locale } = interaction;
 
-    await db.users.upset(db.users.id(user.id), {
-        options: { language }
-    });
-
-    const userLocale = await getUserLocale(user);
+    const currentLocale = await (getUserLocale(user)) ?? locale;
 
     const embed = new EmbedBuilder()
-        .setDescription(translate(userLocale ?? locale, "set_language.embed.description"))
-        .setColor(colors.success);
+        .setDescription(
+            translate(currentLocale, "set_language.initial_embed.description",
+                { translateEmoji: getIcon("translate") }
+            )
+        )
+        .setColor(colors.default);
 
-    await interaction.editReply({ embeds: [embed] });
+    const row = new ActionRowBuilder<StringSelectMenuBuilder>()
+        .addComponents(
+            new StringSelectMenuBuilder()
+                .setCustomId("setlanguage")
+                .addOptions([
+                    {
+                        label: "Portuguese",
+                        value: "pt-br",
+                        emoji: getIcon("translate")
+                    },
+                    {
+                        label: "English",
+                        value: "en-us",
+                        emoji: getIcon("translate")
+                    },
+                    {
+                        label: "Spanish",
+                        value: "es-es",
+                        emoji: getIcon("translate")
+                    },
+                ])
+        )
+
+    await interaction.followUp({ embeds: [embed], components: [row] })
+
+    await selectLanguageMenu(interaction, message);
 }
