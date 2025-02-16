@@ -1,5 +1,5 @@
 import { dirname, importx } from "@discordx/importer";
-import { ActivityType, Interaction, Message, TextChannel } from "discord.js";
+import { ActivityType, Interaction } from "discord.js";
 import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
 import "#database";
@@ -36,7 +36,6 @@ bot.once("ready", () => {
 
 bot.on("interactionCreate", async (interaction: Interaction) => {
     await bot.executeInteraction(interaction);
-
 });
 
 // bot.on("messageCreate", (message: Message) => {
