@@ -1,21 +1,19 @@
-import {
-    ButtonStyle,
-    ActionRowBuilder,
-    ButtonBuilder,
-    ModalBuilder,
-    TextInputBuilder,
-    TextInputStyle,
-    ChatInputCommandInteraction,
-    ModalSubmitInteraction,
-    EmbedBuilder,
-} from "discord.js";
+import { ButtonStyle, ActionRowBuilder, ButtonBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ChatInputCommandInteraction, ModalSubmitInteraction, EmbedBuilder, ButtonInteraction, } from "discord.js";
 import { wordLists } from "../wordList.js";
 import { db, getOrCreateUser } from "#database";
+import { colors } from "#settings";
 
 type GameCache = {
     timeout: NodeJS.Timeout;
     game: TermoGame;
 };
+
+enum HintLevel {
+    None,
+    FirstLetter,
+    MiddleLetter,
+    LastLetter,
+}
 
 export class TermoGame {
     private static readonly games: Map<string, GameCache> = new Map();
@@ -26,6 +24,7 @@ export class TermoGame {
     private guessedWords: string[];
     private currentGuessIndex: number;
     private wordLength: number;
+    private hintLevel: HintLevel;
 
     constructor(
         private interaction: ChatInputCommandInteraction<"cached">,
@@ -40,6 +39,7 @@ export class TermoGame {
         this.chancesLeft = this.maxChances;
         this.guessedWords = Array(this.maxChances).fill(charInvisible.repeat(this.wordLength));
         this.currentGuessIndex = 0;
+        this.hintLevel = HintLevel.None;
     }
 
     public async start(): Promise<void> {
@@ -59,7 +59,7 @@ export class TermoGame {
         }
     }
 
-    public static startNewGame(interaction: ChatInputCommandInteraction<"cached">, theme: keyof typeof wordLists | "general",): TermoGame {
+    public static startNewGame(interaction: ChatInputCommandInteraction<"cached">, theme: keyof typeof wordLists | "general"): TermoGame {
         const userId = interaction.user.id;
 
         this.deleteGame(userId);
@@ -95,13 +95,10 @@ export class TermoGame {
 
     private getRandomWord(): string {
         try {
-            if (this.theme === "general") {
-                const allWords = Object.values(wordLists).flat();
-                return allWords[Math.floor(Math.random() * allWords.length)];
-            } else {
-                const words: string[] = wordLists[this.theme];
-                return words[Math.floor(Math.random() * words.length)];
-            }
+            const words = this.theme === "general"
+                ? Object.values(wordLists).flat()
+                : wordLists[this.theme];
+            return words[Math.floor(Math.random() * words.length)];
         } catch (error) {
             throw new Error("Erro ao selecionar uma palavra aleatória. Verifique as listas de palavras.");
         }
@@ -109,9 +106,8 @@ export class TermoGame {
 
     private async updateStats(userId: string, won: boolean) {
         try {
-            const id = db.users.id(userId);
             const user = await getOrCreateUser(userId);
-            const termoStats = user?.data.games?.termo || {
+            const termoStats = user?.data.games?.termo ?? {
                 victories: 0,
                 totalGuesses: 0,
                 averageGuesses: 0,
@@ -121,13 +117,12 @@ export class TermoGame {
             if (won) {
                 termoStats.victories++;
             }
-            termoStats.averageGuesses =
-                termoStats.victories > 0 ? termoStats.totalGuesses / termoStats.victories : 0;
+            termoStats.averageGuesses = termoStats.victories > 0
+                ? termoStats.totalGuesses / termoStats.victories
+                : 0;
 
-            await db.users.upset(id, {
-                games: {
-                    termo: termoStats,
-                },
+            await db.users.upset(db.users.id(userId), {
+                games: { termo: termoStats },
             });
         } catch (error) {
             console.error("Error:", error);
@@ -148,7 +143,7 @@ export class TermoGame {
                 if (this.guessedWords[row] !== charInvisible.repeat(this.wordLength)) {
                     if (char === this.wordToGuess[col]) {
                         style = ButtonStyle.Success;
-                    } else if (this.wordToGuess.includes(char)) {
+                    } else if (this.wordToGuess.includes(char) && !this.isCharInCorrectPosition(char, row)) {
                         style = ButtonStyle.Primary;
                     } else {
                         style = ButtonStyle.Danger;
@@ -157,7 +152,7 @@ export class TermoGame {
 
                 buttons.push(
                     new ButtonBuilder()
-                        .setCustomId(`cell-${row}-${col}`)
+                        .setCustomId(`cell-${row}-${col}-${this.interaction.user.id}`)
                         .setLabel(char)
                         .setStyle(style)
                         .setDisabled(true)
@@ -173,35 +168,46 @@ export class TermoGame {
         return rows;
     }
 
+    private isCharInCorrectPosition(char: string, row: number): boolean {
+        return this.wordToGuess.split('').some((c, col) => this.guessedWords[row][col] === char && c === char);
+    }
+
     private createGuessButton(): ActionRowBuilder<ButtonBuilder> {
-        return new ActionRowBuilder<ButtonBuilder>().addComponents(
+        const components = [
             new ButtonBuilder()
-                .setCustomId("guess")
+                .setCustomId(`guess-${this.interaction.user.id}`)
                 .setLabel("Chutar Palavra")
                 .setStyle(ButtonStyle.Primary)
-        );
+        ];
+
+        if (this.chancesLeft <= 2 && this.hintLevel < HintLevel.LastLetter) {
+            components.push(
+                new ButtonBuilder()
+                    .setCustomId(`hint-${this.interaction.user.id}`)
+                    .setLabel("Mostrar Dica")
+                    .setStyle(ButtonStyle.Secondary)
+                    .setDisabled(this.hintLevel > HintLevel.None)
+            );
+        }
+
+        return new ActionRowBuilder<ButtonBuilder>().addComponents(components);
     }
 
     private createWordRevealRow(): ActionRowBuilder<ButtonBuilder> {
-        const buttons: ButtonBuilder[] = [];
-
-        for (let col = 0; col < this.wordLength; col++) {
-            const char = this.wordToGuess[col];
-            buttons.push(
-                new ButtonBuilder()
-                    .setCustomId(`reveal-${col}`)
-                    .setLabel(char)
-                    .setStyle(ButtonStyle.Success)
-                    .setDisabled(true)
-            );
-        }
+        const buttons = this.wordToGuess.split('').map((char, col) =>
+            new ButtonBuilder()
+                .setCustomId(`reveal-${col}-${this.interaction.user.id}`)
+                .setLabel(char)
+                .setStyle(ButtonStyle.Success)
+                .setDisabled(true)
+        );
 
         return new ActionRowBuilder<ButtonBuilder>().addComponents(buttons);
     }
 
     public createGuessModal(): ModalBuilder {
         return new ModalBuilder()
-            .setCustomId("guess-modal")
+            .setCustomId(`guess-modal-${this.interaction.user.id}`)
             .setTitle("Chute a Palavra")
             .addComponents(
                 new ActionRowBuilder<TextInputBuilder>().addComponents(
@@ -225,16 +231,27 @@ export class TermoGame {
             "food": "Comidas",
         };
 
+        const hint = this.hintLevel > HintLevel.None ? this.getHint() : "";
+
         return new EmbedBuilder()
             .setTitle("🎯 Jogo do Termo")
             .setDescription(
-                `Tema: ${themeMap[this.theme.toLowerCase()]}\nVocê tem ${this.chancesLeft} chances restantes para adivinhar a palavra.`
+                `Tema: ${themeMap[this.theme.toLowerCase()]}\nVocê tem ${this.chancesLeft} chances restantes para adivinhar a palavra.\n${hint}`
             )
-            .setColor("Blue")
-            .addFields({
-                name: "Dica",
-                value: `A palavra tem ${this.wordLength} letras e começa com **${this.wordToGuess[0]}**.`,
-            });
+            .setColor(colors.default);
+    }
+
+    private getHint(): string {
+        switch (this.hintLevel) {
+            case HintLevel.FirstLetter:
+                return `Dica: A palavra começa com **${this.wordToGuess[0]}**.`;
+            case HintLevel.MiddleLetter:
+                return `Dica: A palavra começa com **${this.wordToGuess[0]}** e contém **${this.wordToGuess[Math.floor(this.wordLength / 2)]}** no meio.`;
+            case HintLevel.LastLetter:
+                return `Dica: A palavra começa com **${this.wordToGuess[0]}** e termina com **${this.wordToGuess[this.wordLength - 1]}**.`;
+            default:
+                return "";
+        }
     }
 
     public async processGuess(interaction: ModalSubmitInteraction<"cached">) {
@@ -275,6 +292,23 @@ export class TermoGame {
             console.error("Erro:", error);
             await interaction.editReply({
                 content: "Ocorreu um erro ao processar seu chute.",
+            });
+        }
+    }
+
+    public async processHint(interaction: ButtonInteraction<"cached">) {
+        try {
+            await interaction.deferUpdate();
+
+            this.hintLevel++;
+            await interaction.editReply({
+                embeds: [this.createEmbed()],
+                components: [...this.createGrid(), this.createGuessButton()],
+            });
+        } catch (error) {
+            console.error("Erro:", error);
+            await interaction.editReply({
+                content: "Ocorreu um erro ao processar a dica.",
             });
         }
     }

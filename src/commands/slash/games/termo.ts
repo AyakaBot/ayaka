@@ -59,7 +59,7 @@ export class Termo {
             description: "Choose the theme of the words for the game",
             descriptionLocalizations: getLocalizations("commands.termo.play.options.theme.description"),
             type: ApplicationCommandOptionType.String,
-            required,
+            required: true,
         })
         theme: "country" | "food" | "soccer" | "general",
         interaction: ChatInputCommandInteraction<"cached">,
@@ -79,28 +79,44 @@ export class Termo {
         await game.start();
     }
 
-    @ButtonComponent({ id: "guess" })
+    @ButtonComponent({ id: /guess-\d+/ })
     async handleGuess(interaction: ButtonInteraction<"cached">) {
-        const { user } = interaction;
+        const userId = interaction.customId.split('-').pop();
 
-        const game = TermoGame.getGame(user.id);
+        if (interaction.user.id !== userId) return;
+
+        const game = TermoGame.getGame(userId);
         if (!game) return;
 
         const modal = game.createGuessModal();
         await interaction.showModal(modal);
     }
 
-    @ModalComponent({ id: "guess-modal" })
+    @ModalComponent({ id: /guess-modal-\d+/ })
     async handleGuessModal(interaction: ModalSubmitInteraction<"cached">) {
-        const { user } = interaction;
+        const userId = interaction.customId.split('-').pop();
 
-        const game = TermoGame.getGame(user.id);
+        if (interaction.user.id !== userId) return;
+
+        const game = TermoGame.getGame(userId);
         if (!game) return;
 
         await game.processGuess(interaction);
 
         if (game["chancesLeft"] === 0 || game["guessedWords"].includes(game["wordToGuess"])) {
-            TermoGame.deleteGame(user.id);
+            TermoGame.deleteGame(userId);
         }
+    }
+
+    @ButtonComponent({ id: /hint-\d+/ })
+    async handleHint(interaction: ButtonInteraction<"cached">) {
+        const userId = interaction.customId.split('-').pop();
+
+        if (interaction.user.id !== userId) return;
+
+        const game = TermoGame.getGame(userId);
+        if (!game) return;
+
+        await game.processHint(interaction);
     }
 }
