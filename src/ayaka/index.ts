@@ -20,6 +20,7 @@ export const bot = new Client({
     //     prefix: []
     // },
     silent: true,
+    failIfNotExists: false,
     botGuilds: [process.env.DEV_GUILD, process.env.SECOND_DEV_GUILD, process.env.LAB_GUILD],
     presence: {
         activities: [{

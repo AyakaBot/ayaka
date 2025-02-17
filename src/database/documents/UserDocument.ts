@@ -19,6 +19,11 @@ export interface UserDocument {
             victories: number,
             totalGuesses: number, 
             averageGuesses: number,
+        },
+        color?: {
+            maxSequence: number,
+            totalSequences: number,
+            averageSequence: number,
         }
     }
 }

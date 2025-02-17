@@ -87,8 +87,10 @@ export class MemoryGame {
             time: 300_000,
         });
 
-        collector?.on("collect", this.handleInteraction.bind(this));
-        collector?.on("end", this.handleEnd.bind(this));
+        if (!collector) return;
+
+        collector.on("collect", this.handleInteraction.bind(this));
+        collector.on("end", this.handleEnd.bind(this));
     }
 
     private async handleInteraction(i: ButtonInteraction): Promise<void> {

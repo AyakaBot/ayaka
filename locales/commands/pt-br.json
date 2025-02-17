@@ -89,9 +89,6 @@
             }
         },
         "termo": {
-            "rank": {
-                "description": "Veja o ranking dos jogadores"
-            },
             "play": {
                 "description": "Jogue o jogo 'Termo' e tente adivinhar a palavra!",
                 "options": {
@@ -108,10 +105,16 @@
                 }
             }
         },
-
         "race": {
             "name": "corrida",
             "description": "Inicie uma corrida entre animais!"
+        },
+        "rank": {
+            "description": "Veja o rank de várias categorias!"
+        },
+        "color_game": {
+            "description": "Inicia um jogo de memória de cores.",
+            "name": "cores"
         }
     }
 }

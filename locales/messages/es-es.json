@@ -167,5 +167,27 @@
         "field_name": "Jugadores",
         "field_value": "Aún no hay jugadores",
         "win": "🏆 <@{userId}> ganó la carrera con {animal}!"
+    },
+    "rank": {
+        "initial_embed": {
+            "title": "Seleccionar clasificación",
+            "description": "Elija la clasificación que desea ver"
+        },
+        "second_embed": {
+            "termo_title": "🏆 Termo",
+            "game_color_title": "🏆 Juego de Colores",
+            "pamonhas_title": "🏆 Pamonhas",
+            "termo_description": "{position}. {user} - Victorias: {victories}, Total: {total}, Promedio: {average}",
+            "game_color_description": "{position}. {user} - Racha más larga: {max}, Total: {total}, Promedio: {average}"
+        },
+        "menu": {
+            "pamonhas_description": "Vea quiénes son los más ricos.",
+            "termo_description": "Ver la clasificación del juego de términos.",
+            "game_color_description": "Clasificación del juego de memoria de colores"
+        }
+    },
+    "color_game": {
+        "finished": "{recuse} ¡Te equivocaste! La secuencia tenía {sequence} pasos.",
+        "timeout": "{clock} ¡Se acabó el tiempo! El juego ha terminado."
     }
 }

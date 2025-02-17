@@ -2,7 +2,7 @@ import { getLocalizations } from "#translate";
 import { executeVersus } from "../../functions/memory/versus/versus.js";
 import { executeCooperative } from "../../functions/memory/cooperative/cooperative.js";
 import { executeAlone } from "../../functions/memory/alone/alone.js";
-import { betAutocomplete } from "../../functions/betAutocomplete.js";
+import { betAutocomplete } from "../../utils/betAutocomplete.js";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, InteractionContextType, User } from "discord.js";
 import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
 

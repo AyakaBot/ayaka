@@ -9,12 +9,25 @@ const DEFAULT_COOLDOWNS = {
         lastClaimMonthly: new Date(0)
     }
 };
+const DEFAULT_GAMES = {
+    termo: {
+        victories: 0,
+        totalGuesses: 0,
+        averageGuesses: 0,
+    },
+    color: {
+        maxSequence: 0,
+        totalSequences: 0,
+        averageSequence: 0,
+    }
+};
 
 async function initializeUser(userId: string) {
     const id = db.users.id(userId);
     await db.users.set(id, {
         wallet: DEFAULT_WALLET,
-        cooldowns: DEFAULT_COOLDOWNS
+        cooldowns: DEFAULT_COOLDOWNS,
+        games: DEFAULT_GAMES
     });
     return db.users.get(id);
 }
@@ -52,23 +65,32 @@ export async function getUserLocale(user: User): Promise<Locale | null> {
 }
 
 export async function updateUserPamonhas(userId: string, amount: number) {
-    const id = db.users.id(userId);
-    const user = await getOrCreateUser(userId);
+    try {
+        const id = db.users.id(userId);
+        const user = await getOrCreateUser(userId);
 
-    const currentPamonhas = user?.data.wallet?.pamonhas || 0;
-    const updatedPamonhas = currentPamonhas + amount;
+        const currentPamonhas = user?.data.wallet?.pamonhas || 0;
+        const updatedPamonhas = currentPamonhas + amount;
 
-    await db.users.upset(id, {
-        wallet: { pamonhas: updatedPamonhas }
-    });
+        await db.users.upset(id, {
+            wallet: { pamonhas: updatedPamonhas }
+        });
+    } catch (error) {
+        console.error(`Failed to update pamonhas for user ${userId}:`, error);
+    }
 }
 
 export async function getUserRankingPosition(userId: string) {
-    const allUsers = await db.users.all();
-    const sortedUsers = allUsers.sort((a, b) => (b.data.wallet?.pamonhas ?? 0) - (a.data.wallet?.pamonhas ?? 0));
+    try {
+        const allUsers = await db.users.all();
+        const sortedUsers = allUsers.sort((a, b) => (b.data.wallet?.pamonhas ?? 0) - (a.data.wallet?.pamonhas ?? 0));
 
-    const userIndex = sortedUsers.findIndex(u => u.ref.id === userId);
-    return userIndex + 1;
+        const userIndex = sortedUsers.findIndex(u => u.ref.id === userId);
+        return userIndex + 1;
+    } catch (error) {
+        console.error(`Failed to get ranking position for user ${userId}:`, error);
+        return -1;
+    }
 }
 
 export function isCooldownActive(lastClaim: Date, type: "daily" | "weekly" | "monthly") {
@@ -84,45 +106,23 @@ export function isCooldownActive(lastClaim: Date, type: "daily" | "weekly" | "mo
 }
 
 export async function updateUserCooldown(userId: string, type: "Daily" | "Weekly" | "Monthly") {
-    const id = db.users.id(userId);
-    const user = await getOrCreateUser(userId);
+    try {
+        const id = db.users.id(userId);
+        const user = await getOrCreateUser(userId);
 
-    const lastClaimKey = `lastClaim${type}` as keyof typeof DEFAULT_COOLDOWNS.rewards;
-    const now = new Date();
+        const lastClaimKey = `lastClaim${type}` as keyof typeof DEFAULT_COOLDOWNS.rewards;
+        const now = new Date();
 
-    await db.users.upset(id, {
-        wallet: user?.data.wallet || DEFAULT_WALLET,
-        cooldowns: {
-            rewards: {
-                ...(user?.data.cooldowns?.rewards || DEFAULT_COOLDOWNS.rewards),
-                [lastClaimKey]: now
+        await db.users.upset(id, {
+            wallet: user?.data.wallet || DEFAULT_WALLET,
+            cooldowns: {
+                rewards: {
+                    ...(user?.data.cooldowns?.rewards || DEFAULT_COOLDOWNS.rewards),
+                    [lastClaimKey]: now
+                }
             }
-        }
-    });
-}
-
-export async function getTermoRanking() {
-    const allUsers = await db.users.all();
-
-    const sortedUsers = allUsers
-        .filter(user => {
-            const termoStats = user.data.games?.termo;
-            return (
-                (termoStats?.victories ?? 0) > 0 ||
-                (termoStats?.totalGuesses ?? 0) > 0 ||
-                (termoStats?.averageGuesses ?? 0) > 0
-            );
-        })
-        .sort((a, b) => (b.data.games?.termo?.victories ?? 0) - (a.data.games?.termo?.victories ?? 0)); 
-
-    return sortedUsers.map((user, index) => {
-        const termoStats = user.data.games?.termo;
-        return {
-            position: index + 1, 
-            userId: user.ref.id, 
-            victories: termoStats?.victories ?? 0, 
-            totalGuesses: termoStats?.totalGuesses ?? 0,
-            averageGuesses: termoStats?.averageGuesses ?? 0, 
-        };
-    });
+        });
+    } catch (error) {
+        console.error(`Failed to update cooldown for user ${userId}:`, error);
+    }
 }

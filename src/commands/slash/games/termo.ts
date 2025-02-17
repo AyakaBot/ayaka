@@ -2,32 +2,12 @@ import { ApplicationCommandOptionType, ButtonInteraction, ChatInputCommandIntera
 import { ButtonComponent, Discord, ModalComponent, Slash, SlashChoice, SlashGroup, SlashOption } from "discordx";
 import { TermoGame } from "../../functions/termo/game/TermoGame.js";
 import { getUserLocale } from "#database";
-import { executeRank } from "../../functions/termo/rank/rank.js";
 import { getLocalizations, translate } from "#translate";
 
 @Discord()
 @SlashGroup({ name: "termo", description: "Play the game 'Termo' and try to guess the word!" })
 @SlashGroup("termo")
 export class Termo {
-    @Slash({
-        description: "See the players' rankings",
-        descriptionLocalizations: getLocalizations("commands.termo.rank.description"),
-    })
-    async rank(interaction: ChatInputCommandInteraction<"cached">) {
-        const { locale, user } = interaction;
-
-        const currentLocale = (await getUserLocale(user)) ?? locale;
-
-        if (currentLocale.toLowerCase() !== "pt-br") {
-            return await interaction.reply({
-                flags,
-                content: translate(currentLocale, "termo.errors.not_available"),
-            });
-        }
-
-        await executeRank(interaction);
-    }
-
     @Slash({
         description: "Play the game 'Term' and try to guess the word!",
         descriptionLocalizations: getLocalizations("commands.termo.play.description"),

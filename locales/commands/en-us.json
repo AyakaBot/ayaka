@@ -73,9 +73,6 @@
             }
         },
         "termo": {
-            "rank": {
-                "description": "See the player rankings"
-            },
             "play": {
                 "description": "Play the game 'Termo' and try to guess the word!",
                 "options": {
@@ -95,6 +92,13 @@
         "race": {
             "name": "race",
             "description": "Start a race between animals!"
+        },
+        "rank": {
+            "description": "Shows rank any category."
+        },
+        "color_game": {
+            "description": "Starts a color memory game.",
+            "name": "color"
         }
     }
 }

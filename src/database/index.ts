@@ -39,3 +39,4 @@ export * from "./documents/PayDocument.js";
 // functions
 export * from "./functions/users.js";
 export * from "./functions/pay.js"
+export * from "./functions/games.js";

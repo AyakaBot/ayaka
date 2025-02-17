@@ -17,6 +17,7 @@ export const getCommandCategories = (locale: string): CommandCategory[] => [
             { name: translate(locale, "commands.help.name"), description: translate(locale, "commands.help.description") },
             { name: translate(locale, "commands.ping.name"), description: translate(locale, "commands.ping.description") },
             { name: "minecraft skin", description: translate(locale, "commands.minecraft.description") },
+            { name: "rank", description: translate(locale, "commands.rank.description") },
             { name: translate(locale, "commands.language.name"), description: translate(locale, "commands.language.description") },
         ],
     },
@@ -38,6 +39,7 @@ export const getCommandCategories = (locale: string): CommandCategory[] => [
             { name: "termo play", description: translate(locale, "commands.termo.play.description") },
             { name: translate(locale, "commands.miner.name"), description: translate(locale, "commands.miner.description") },
             { name: translate(locale, "commands.race.name"), description: translate(locale, "commands.race.description") },
+            { name: translate(locale, "commands.color_game.name"), description: translate(locale, "commands.color_game.description") },
         ],
     },
 ];

@@ -167,5 +167,27 @@
         "field_name": "Players",
         "field_value": "No players yet",
         "win": "🏆 <@{userId}> won the race with {animal}!"
+    },
+    "rank": {
+        "initial_embed": {
+            "title": "Select Ranking",
+            "description": "Choose the ranking you want to view"
+        },
+        "second_embed": {
+            "termo_title": "🏆 Termo",
+            "game_color_title": "🏆 Color Game",
+            "pamonhas_title": "🏆 Pamonhas",
+            "termo_description": "{position}. {user} - Wins: {victories}, Total: {total}, Average: {average}",
+            "game_color_description": "{position}. {user} - Longest Streak: {max}, Total: {total}, Average: {average}"
+        },
+        "menu": {
+            "pamonhas_description": "See who is the richest.",
+            "termo_description": "View the term game ranking.",
+            "game_color_description": "Ranking of the color memory game"
+        }
+    },
+    "color_game": {
+        "finished": "{recuse} You missed it! The sequence had {sequence} steps.",
+        "timeout": "{clock} Time's up! The game has ended."
     }
 }
