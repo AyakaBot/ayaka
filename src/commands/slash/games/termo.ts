@@ -1,6 +1,6 @@
 import { ApplicationCommandOptionType, ButtonInteraction, ChatInputCommandInteraction, ModalSubmitInteraction } from "discord.js";
 import { ButtonComponent, Discord, ModalComponent, Slash, SlashChoice, SlashGroup, SlashOption } from "discordx";
-import { TermoGame } from "../../functions/termo/game/TermoGame.js";
+import { TermoGame } from "../../functions/termo/TermoGame.js";
 import { getUserLocale } from "#database";
 import { getLocalizations, translate } from "#translate";
 

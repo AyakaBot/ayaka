@@ -175,9 +175,7 @@ export class MinesweeperGame {
                 this.state.multiplier += this.multiplierIncrement;
                 this.state.clickCount++;
 
-                this.state.currentBombProbability += 0.05;
-
-                console.log(this.state.currentBombProbability)
+                this.state.currentBombProbability = parseFloat((this.state.currentBombProbability + 0.05).toFixed(2));
 
                 this.recalculateGrid();
 

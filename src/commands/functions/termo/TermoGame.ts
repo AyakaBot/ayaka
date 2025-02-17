@@ -1,5 +1,5 @@
-import { ButtonStyle, ActionRowBuilder, ButtonBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ChatInputCommandInteraction, ModalSubmitInteraction, EmbedBuilder, ButtonInteraction, } from "discord.js";
-import { wordLists } from "../wordList.js";
+import { ButtonStyle, ActionRowBuilder, ButtonBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ChatInputCommandInteraction, ModalSubmitInteraction, EmbedBuilder, ButtonInteraction } from "discord.js";
+import { wordLists } from "./wordList.js";
 import { db, getOrCreateUser } from "#database";
 import { colors } from "#settings";
 
@@ -143,7 +143,7 @@ export class TermoGame {
                 if (this.guessedWords[row] !== charInvisible.repeat(this.wordLength)) {
                     if (char === this.wordToGuess[col]) {
                         style = ButtonStyle.Success;
-                    } else if (this.wordToGuess.includes(char) && !this.isCharInCorrectPosition(char, row)) {
+                    } else if (this.wordToGuess.includes(char) && !this.isCharInCorrectPosition(char, row, col)) {
                         style = ButtonStyle.Primary;
                     } else {
                         style = ButtonStyle.Danger;
@@ -168,8 +168,8 @@ export class TermoGame {
         return rows;
     }
 
-    private isCharInCorrectPosition(char: string, row: number): boolean {
-        return this.wordToGuess.split('').some((c, col) => this.guessedWords[row][col] === char && c === char);
+    private isCharInCorrectPosition(char: string, row: number, col: number): boolean {
+        return this.wordToGuess.split('').some((c, index) => this.guessedWords[row][index] === char && c === char && index !== col);
     }
 
     private createGuessButton(): ActionRowBuilder<ButtonBuilder> {
