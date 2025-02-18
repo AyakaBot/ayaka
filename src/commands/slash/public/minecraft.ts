@@ -1,5 +1,5 @@
 import { getLocalizations } from "#translate";
-import { execute } from "../../functions/minecraft/skin.js";
+import { MinecraftSkin } from "../../functions/minecraft/Minecraft.js";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, InteractionContextType } from "discord.js";
 import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
 
@@ -29,6 +29,8 @@ export class Minecraft {
         nickname: string,
         interaction: ChatInputCommandInteraction<"cached">
     ) {
-        await execute(interaction, nickname);
+        const minecraft = new MinecraftSkin(interaction, nickname);
+
+        await minecraft.execute();
     }
 }
