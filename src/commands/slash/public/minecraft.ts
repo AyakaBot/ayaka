@@ -1,5 +1,5 @@
 import { getLocalizations } from "#translate";
-import { MinecraftSkin } from "../../functions/minecraft/Minecraft.js";
+import { MinecraftSkin } from "../../functions/utils/minecraft/Minecraft.js";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, InteractionContextType } from "discord.js";
 import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
 

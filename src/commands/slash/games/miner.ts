@@ -1,6 +1,6 @@
 import { getLocalizations } from "#translate";
 import { betAutocomplete } from "../../utils/betAutocomplete.js";
-import { execute } from "../../functions/miner/miner.js";
+import { MinesweeperGame } from "../../functions/games/miner/MinerGame.js";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, InteractionContextType } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 
@@ -26,7 +26,10 @@ export class Miner {
             required
         })
         bet: number,
-        interaction: ChatInputCommandInteraction<"cached">) {
-        await execute(interaction, bet);
+        interaction: ChatInputCommandInteraction<"cached">
+    ) {
+        const miner = new MinesweeperGame(bet, interaction);
+
+        await miner.start();
     }
 }

@@ -5,7 +5,7 @@ import {
     InteractionContextType,
 } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
-import { processTransfer } from "../../functions/pay/pay.js";
+import { processTransfer } from "../../functions/economy/pay/pay.js";
 import { getLocalizations, translate } from "#translate";
 import { getUserLocale } from "#database";
 

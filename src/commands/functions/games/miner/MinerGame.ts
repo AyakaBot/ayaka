@@ -1,11 +1,4 @@
-import {
-    ChatInputCommandInteraction,
-    ActionRowBuilder,
-    ButtonBuilder,
-    ButtonStyle,
-    ComponentType,
-    EmbedBuilder
-} from "discord.js";
+import { ChatInputCommandInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder } from "discord.js";
 import { getOrCreateUser, getUserLocale, updateUserPamonhas } from "#database";
 import { colors, getIcon, icon } from "#settings";
 import { translate } from "#translate";

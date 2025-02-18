@@ -1,5 +1,5 @@
 import { getLocalizations } from "#translate";
-import { Rank } from "../../functions/rank/rank.js";
+import { Rank } from "../../functions/utils/rank/rank.js";
 import { ChatInputCommandInteraction, InteractionContextType } from "discord.js";
 import { Discord, Slash } from "discordx";
 

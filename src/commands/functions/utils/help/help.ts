@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction } from "discord.js";
 import { getUserLocale } from "#database";
 import { createHelpPages } from "./createPages.js";
-import { createPagination } from "../../utils/pagination.js";
+import { createPagination } from "../../../utils/pagination.js";
 
 export async function execute(interaction: ChatInputCommandInteraction<"cached">) {
     const { user } = interaction;

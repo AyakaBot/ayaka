@@ -1,12 +1,12 @@
 import { ActionRowBuilder, ChatInputCommandInteraction, StringSelectMenuBuilder, StringSelectMenuInteraction, EmbedBuilder, ComponentType } from "discord.js";
 import { getRanking, getUserLocale, RankingType } from "#database";
-import { createPagination } from "../../utils/pagination.js";
+import { createPagination } from "../../../utils/pagination.js";
 import { colors } from "#settings";
 import { translate } from "#translate";
 
 export class Rank {
     private readonly interaction: ChatInputCommandInteraction<"cached">;
-    private readonly pageSize: number = 3;
+    private readonly pageSize: number = 5;
 
     constructor(interaction: ChatInputCommandInteraction<"cached">) {
         this.interaction = interaction;

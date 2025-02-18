@@ -1,7 +1,7 @@
 import { getLocalizations } from "#translate";
-import { executeVersus } from "../../functions/memory/versus/versus.js";
-import { executeCooperative } from "../../functions/memory/cooperative/cooperative.js";
-import { executeAlone } from "../../functions/memory/alone/alone.js";
+import { executeVersus } from "../../functions/games/memory/versus/versus.js";
+import { executeCooperative } from "../../functions/games/memory/cooperative/cooperative.js";
+import { executeAlone } from "../../functions/games/memory/alone/alone.js";
 import { betAutocomplete } from "../../utils/betAutocomplete.js";
 import { ApplicationCommandOptionType, ChatInputCommandInteraction, InteractionContextType, User } from "discord.js";
 import { Discord, Slash, SlashGroup, SlashOption } from "discordx";

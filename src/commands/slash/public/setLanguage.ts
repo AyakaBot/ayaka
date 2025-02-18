@@ -1,5 +1,5 @@
 import { getLocalizations } from "#translate";
-import { execute } from "../../functions/setLanguage/setLanguage.js";
+import { execute } from "../../functions/utils/setLanguage/setLanguage.js";
 import { ChatInputCommandInteraction, InteractionContextType } from "discord.js";
 import { Discord, Slash } from "discordx";
 

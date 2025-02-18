@@ -1,5 +1,5 @@
 import { getLocalizations } from "#translate";
-import { ColorGame } from "../../functions/colorGame/ColorGame.js";
+import { ColorGame } from "../../functions/games/color/ColorGame.js";
 import { ChatInputCommandInteraction, InteractionContextType } from "discord.js";
 import { Discord, Slash } from "discordx";
 

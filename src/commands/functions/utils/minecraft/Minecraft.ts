@@ -1,7 +1,7 @@
 import { colors } from "#settings";
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import { fetchSkinRender, RenderTypes, RenderCrops } from "starlightskinapi";
-import { createPagination } from "../../utils/pagination.js";
+import { createPagination } from "../../../utils/pagination.js";
 import { translate } from "#translate";
 import { getUserLocale } from "#database";
 import { RenderOptions, RenderConfig } from "./models.js";

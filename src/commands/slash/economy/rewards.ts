@@ -2,7 +2,7 @@ import { ButtonInteraction, ChatInputCommandInteraction, EmbedBuilder, Interacti
 import { ButtonComponent, Discord, Slash } from "discordx";
 import { getOrCreateUser, getUserLocale } from "#database";
 import { colors, getIcon } from "#settings";
-import { claimReward, getButtonCooldown, createButtonRow, generateRandomReward } from "../../functions/rewards/rewards.js";
+import { claimReward, getButtonCooldown, createButtonRow, generateRandomReward } from "../../functions/economy/rewards/rewards.js";
 import { getLocalizations, translate } from "#translate";
 
 @Discord()

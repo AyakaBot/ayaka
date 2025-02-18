@@ -1,7 +1,7 @@
 import { getLocalizations } from "#translate";
 import { ChatInputCommandInteraction, InteractionContextType } from "discord.js";
 import { Discord, Slash } from "discordx";
-import { execute } from "../../functions/help/help.js";
+import { execute } from "../../functions/utils/help/help.js";
 
 @Discord()
 export class Info {

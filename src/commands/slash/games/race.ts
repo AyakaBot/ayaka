@@ -1,5 +1,5 @@
 import { getLocalizations } from "#translate";
-import { execute } from "../../functions/race/race.js";
+import { execute } from "../../functions/games/race/race.js";
 import { ChatInputCommandInteraction, InteractionContextType } from "discord.js";
 import { Discord, Slash } from "discordx";
 
